@@ -1,7 +1,7 @@
 // ==AyuPlugin==
 // @id text-shortcuts
 // @name Text shortcuts
-// @author murk-sus
+// @author murk-sus & dsn2fvhmn4-lgtm
 // @version 1.0
 // @description Expands shortcuts in outgoing messages: :shrug: → ¯\_(ツ)_/¯, :lenny: → ( ͡° ͜ʖ ͡°), :tableflip: → (╯°□°)╯︵ ┻━┻, ->, <-, (c), (tm) and more.
 // @tags text, fun

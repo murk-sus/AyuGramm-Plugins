@@ -5,7 +5,7 @@
     {
       "id": "acd",
       "name": "Album Cover Downloader",
-      "author": "@ka1Plugins",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Сохраняет доступное превью обложки аудиофайла в Фото.",
       "tags": [
@@ -20,7 +20,7 @@
     {
       "id": "camera_flip",
       "name": "Camera Flip",
-      "author": "@its240hz (original)",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "0.2.0-ios.1",
       "description": "Switch the round-video camera using vertical swipes or double taps. Gesture mode and haptic feedback are configurable.",
       "tags": [
@@ -35,7 +35,7 @@
     {
       "id": "chat_colors",
       "name": "Chat Colors",
-      "author": "@lerowc & @lerowplug (original)",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0-ios.1",
       "description": "Per-chat colors in the chat list, nine presets, custom HEX, brightness, colored-chat management and reset.",
       "tags": [
@@ -50,7 +50,7 @@
     {
       "id": "clean-links",
       "name": "Clean links",
-      "author": "murk-sus",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Removes tracking parameters (utm_*, fbclid, gclid, si, igsh…) from links you send, so they do not reveal where you found them.",
       "tags": [
@@ -60,14 +60,14 @@
       "kind": "js",
       "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/clean-links/plugin.ayu.js",
-      "sha256": "e07ebe037d2789c018543d210f3ee3b10544c38173a315dd32209c4555983200",
-      "size": 1104,
-      "signature": "rzg20hhthkTXB6oDTfi1ikIG4msNBo/U9fnurrk6Nm+VXeYUcWW4l4jnVNY/qRdtP8hbzTAdSqjrpRO190ouDg=="
+      "sha256": "342d9a9c9f0b2f77e90ffaee5e1824765105783587ed70dc112629cb74c75ef3",
+      "size": 1122,
+      "signature": "EYL9bPq6Sl6u4NxFDHKEytylDGtBBol96oNBE7jU6nF5+ml7NpwA3Yrbe2tUSjhjDk8MPO0np1tFtUoHN5NcBw=="
     },
     {
       "id": "del_my_msgs",
       "name": "Delete My Messages",
-      "author": "@akresik",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Поиск и удаление своих сообщений в чате после подтверждения.",
       "tags": [
@@ -82,7 +82,7 @@
     {
       "id": "emoji-shortcuts-rs",
       "name": "Emoji shortcuts (Rust)",
-      "author": "murk-sus",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Rust plugin: :fire:, :heart:, :ok:, :lol:, :100: and other shortcuts become emoji in messages you send.",
       "tags": [
@@ -93,14 +93,14 @@
       "kind": "wasm",
       "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/emoji-shortcuts-rs/plugin.wasm",
-      "sha256": "1301d58753ee5d6d10cf8964e0f59826e26ff0d006249f152076732c76e918ae",
-      "size": 59904,
-      "signature": "Nl+w2P3nRDwmoolOrdBWrg2PvEKKN8CtAep+n57zb1FE7XDTZXVoMNdQnoidc0Ic1tEkuv2/l/kxD0TcUSQLDw=="
+      "sha256": "b59815c9870db5b5e5ac602e0567373a80da832cb493714cd3317f80fb5831d4",
+      "size": 59938,
+      "signature": "CqT57Ey4AwyuUjXObPDfNxQx1Woh3efAc5UcIEZ88I0RefECM8YxJ2YGeWyo6LC+lv9FiaXSMFgboxfYlSKqBA=="
     },
     {
       "id": "formatted_copy",
       "name": "formatted copy",
-      "author": "@meatdisk",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0.0-ios.1",
       "description": "Native message copying with author, optional date/time, media labels and available reply quotes.",
       "tags": [
@@ -115,7 +115,7 @@
     {
       "id": "game_arcade",
       "name": "Arcade Games",
-      "author": "@Art_727 & @lerowplug",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.1",
       "description": "2048, Flappy Bird and Chrome Dino through the existing native Arcade Games bridge.",
       "tags": [
@@ -130,7 +130,7 @@
     {
       "id": "group_mentions",
       "name": "Group Mentions",
-      "author": "@Hikerys",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.2-ios.1",
       "description": "Native saved username groups with whole-command expansion and a per-chat cooldown.",
       "tags": [
@@ -145,7 +145,7 @@
     {
       "id": "hide_attach_buttons",
       "name": "HideAttachButtons",
-      "author": "@optimist_opti × @KUNSESHBOY",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Скрывает выбранные разделы меню вложений.",
       "tags": [
@@ -160,7 +160,7 @@
     {
       "id": "layout-fix",
       "name": "Layout fix",
-      "author": "murk-sus",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Fixes text typed in the wrong keyboard layout: \"ghbdtn\" → \"привет\", \"руддщ\" → \"hello\". Only whole messages that clearly look mistyped are changed.",
       "tags": [
@@ -170,14 +170,14 @@
       "kind": "js",
       "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/layout-fix/plugin.ayu.js",
-      "sha256": "b2b32ec6997da9f5421e86b8087e14b36abd0c9f614c6d2853bd516ffd3cc569",
-      "size": 1967,
-      "signature": "u9d7uLHO4dqYUlCiiPl4bOPPRCMkcXD04QYroDyVxKAXPOg1mABvqOfwVv0JWBDad4IMbpZRP/S6VWYZq4DuAQ=="
+      "sha256": "bb16bd94a5a94e30d0205753ee3043651f40127d6c45f557fcf686feb4674ab1",
+      "size": 1985,
+      "signature": "bvcRMBOMxuvyCF407ZaM+5ecNfwIpib12EEHXtt+WGT6UnlRp/7OnIKG97aeXyenCGHLLGL48VfVe+aDnIHvBw=="
     },
     {
       "id": "lyrics-cleaner",
       "name": "Lyrics cleaner",
-      "author": "murk-sus",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Python plugin: removes \"[Куплет 1]\", \"Припев:\", \"(x2)\" and similar labels from song lyrics. Switches in Settings → AyuGram → Lyrics sources.",
       "tags": [
@@ -187,14 +187,14 @@
       "kind": "python",
       "injects": true,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/lyrics-cleaner/plugin.ayu.py",
-      "sha256": "6a2455bbbe8f2cefde8170366ef0abc274d31aeb2d5df001c353927f5dc1c96a",
-      "size": 2882,
-      "signature": "v+0GAK/8aDOExquYqDC0OVjjh1gins5mO6SuUx02cGZlkQUpNsiT983R7thJCZxOlmXD3envduTO3AoZEUElBg=="
+      "sha256": "f97b15941e13abc44d5cdcd2a7d307f1a21d9e14dbdad07a2f27f031d35fa143",
+      "size": 2900,
+      "signature": "QBPnMDY37kHSzkX5CI8LpvxomE0ktL2mhwnellpe5mCPzgd+OnkB9LxN2LDHjCvYkSyuRkeoDSBpYmQGlcPtBQ=="
     },
     {
       "id": "mini_avatar",
       "name": "Mini Avatar",
-      "author": "@KUNSESHBOY",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Размер аватаров около сообщений: 18–34 точки.",
       "tags": [
@@ -209,7 +209,7 @@
     {
       "id": "minimal-ui",
       "name": "Minimal UI",
-      "author": "murk-sus",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "A calmer Telegram: hides stories, similar channels, Premium statuses, the greeting sticker and the fast-share button while enabled. Turning the plugin off brings everything back.",
       "tags": [
@@ -218,14 +218,14 @@
       "kind": "js",
       "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/minimal-ui/plugin.ayu.js",
-      "sha256": "cb9d805d079f9cb3b7a46ba0976834f110daa77969c0fadde218216929839e39",
-      "size": 494,
-      "signature": "HfCw/HfXhAvsQzhbzbzpAiTkjQGwNfCBtgQDbwK5FSD3cpK+MCTRJL32nYjTyzSTJe2aVKgBrvOo7cEolnE4BQ=="
+      "sha256": "5172dbca31f5234e85e809717140ca4ab0bed8ec633a0f0e9501080998aed15f",
+      "size": 512,
+      "signature": "mLFFu3BZBwz1okA2Tqm03/7by2tVEUdEtGSipVlEou8Wmc7MFyEWC1Nj5iG91g/xoEXGJLBlysJBZGmXLAycAQ=="
     },
     {
       "id": "petpet",
       "name": "petpet",
-      "author": "@limeplug",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0.6-ios.1",
       "description": "Native petpet GIF composition from a chat avatar or an image in Files, with preview and configurable resolution/frame delay.",
       "tags": [
@@ -240,7 +240,7 @@
     {
       "id": "pill_labels",
       "name": "Pill Labels",
-      "author": "@Persik_dll & claude",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Обводка и фон подписей полей профиля, шесть цветов.",
       "tags": [
@@ -255,7 +255,7 @@
     {
       "id": "reactions_total",
       "name": "Reactions Total",
-      "author": "Daxo-Developer @Daxo_OS",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "2.0.0-ios.1",
       "description": "Reaction totals in the message timestamp line, with compact counts, paid-reaction and channel filters.",
       "tags": [
@@ -270,7 +270,7 @@
     {
       "id": "search_plus",
       "name": "Search+ for iOS",
-      "author": "@SearchPlusss (original)",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "2.6.1-ios.2",
       "description": "Multi-term search in the current chat/topic. The API 9 base app also provides author, date-range and media-type filters.",
       "tags": [
@@ -285,7 +285,7 @@
     {
       "id": "service_cleaner",
       "name": "Service Cleaner",
-      "author": "Автор: @PLOXOI_RRO",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Удаление загруженных служебных сообщений после подтверждения.",
       "tags": [
@@ -300,7 +300,7 @@
     {
       "id": "smart-quotes",
       "name": "Smart quotes",
-      "author": "murk-sus",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.1",
       "description": "Straight quotes become «ёлочки» in Russian text and “curly” quotes otherwise; \"--\" becomes an em dash.",
       "tags": [
@@ -310,14 +310,14 @@
       "kind": "js",
       "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart-quotes/plugin.ayu.js",
-      "sha256": "9ce351e05878d7ae36ac1818739fceba38c2e39373418f31ec5d3cd9af005c84",
-      "size": 656,
-      "signature": "9StWy9ra23YhmNPhioo6CjcJ9PO0SAW/RtBC5j5wafKjxq1T8ByD1wZGzsQ1AjZe9d7LvbfefPcifsDkA0gZBw=="
+      "sha256": "67c6b11c24a8e44b59dfded15868d24aa17dd6f0cdba25b8be7a0026e9829f69",
+      "size": 674,
+      "signature": "PZPuO6VLBbGZXo3+L1Q/49IE32hXrTffjmhsoJ3QAij9K1MyIiMKS7o43QJHUM1FLIGVcq+iGVmf4GxEanHJBg=="
     },
     {
       "id": "smart_auto_archiver",
       "name": "Auto Archive Chats",
-      "author": "@nainraft",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Архивирует неактивные чаты при запуске приложения.",
       "tags": [
@@ -332,7 +332,7 @@
     {
       "id": "text-shortcuts",
       "name": "Text shortcuts",
-      "author": "murk-sus",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Expands shortcuts in outgoing messages: :shrug: → ¯\\_(ツ)_/¯, :lenny: → ( ͡° ͜ʖ ͡°), :tableflip: → (╯°□°)╯︵ ┻━┻, ->, <-, (c), (tm) and more.",
       "tags": [
@@ -342,14 +342,14 @@
       "kind": "js",
       "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/text-shortcuts/plugin.ayu.js",
-      "sha256": "56e19fb1f31e5aee448dd7bab6bde660506ebfbb57c2c03ee5f9b6d905f42d58",
-      "size": 1156,
-      "signature": "3+q1sdMg183mcyKBRur2cE157Vb/JZSxdZYyYyQBY6bsfVziJle3f8ZNZmrWrBQF3OfwVd/jX9MncFOMB4MqDg=="
+      "sha256": "a70e7629f3d480507db2546d73ce20a47001212d6ffca5668f443f790716282d",
+      "size": 1174,
+      "signature": "Gv16MGLytGILJ/TsCm6N14FYnVjffavOylt+HO/LX7o2mffmdY6TuZWStjj4vl3bQ00Zv+ujL8vRxIOdlQfjCA=="
     },
     {
       "id": "unlim_accounts",
       "name": "Unlim Accounts",
-      "author": "@rezolvePlugins",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
       "version": "1.0",
       "description": "Raises the local client add-account limit to 999 through the existing iOS bridge.",
       "tags": [

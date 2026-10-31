@@ -1,7 +1,7 @@
 # ==AyuPlugin==
 # @id lyrics-cleaner
 # @name Lyrics cleaner
-# @author murk-sus
+# @author murk-sus & dsn2fvhmn4-lgtm
 # @version 1.0
 # @description Python plugin: removes "[Куплет 1]", "Припев:", "(x2)" and similar labels from song lyrics. Switches in Settings → AyuGram → Lyrics sources.
 # @tags lyrics, python

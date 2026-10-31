@@ -12,16 +12,16 @@
     "signature": "8ZW/jI37y3jtJBs0gZ9q5z6dEOOOpvQYnim2i6UjHTJbg66PRUBiTcEDlu8WMVzdRL1ubowwMUbhuSu9Z/uFDA=="
   },
   "clean-links": {
-    "sha256": "e07ebe037d2789c018543d210f3ee3b10544c38173a315dd32209c4555983200",
-    "signature": "rzg20hhthkTXB6oDTfi1ikIG4msNBo/U9fnurrk6Nm+VXeYUcWW4l4jnVNY/qRdtP8hbzTAdSqjrpRO190ouDg=="
+    "sha256": "342d9a9c9f0b2f77e90ffaee5e1824765105783587ed70dc112629cb74c75ef3",
+    "signature": "EYL9bPq6Sl6u4NxFDHKEytylDGtBBol96oNBE7jU6nF5+ml7NpwA3Yrbe2tUSjhjDk8MPO0np1tFtUoHN5NcBw=="
   },
   "del_my_msgs": {
     "sha256": "17ddeef8f91d1152ac35b7b0010f25fc20feba1af844cc744454dd9deca7d5b9",
     "signature": "MP58ldG2b4Ltg49RupFJL32REGz/73r4zEFyjxoHzfvObGjmH0Is4rPeuRYbXM44gwIjqGqP9hbZfCRWCyVsAQ=="
   },
   "emoji-shortcuts-rs": {
-    "sha256": "1301d58753ee5d6d10cf8964e0f59826e26ff0d006249f152076732c76e918ae",
-    "signature": "Nl+w2P3nRDwmoolOrdBWrg2PvEKKN8CtAep+n57zb1FE7XDTZXVoMNdQnoidc0Ic1tEkuv2/l/kxD0TcUSQLDw=="
+    "sha256": "b59815c9870db5b5e5ac602e0567373a80da832cb493714cd3317f80fb5831d4",
+    "signature": "CqT57Ey4AwyuUjXObPDfNxQx1Woh3efAc5UcIEZ88I0RefECM8YxJ2YGeWyo6LC+lv9FiaXSMFgboxfYlSKqBA=="
   },
   "formatted_copy": {
     "sha256": "82b258f996e1996a8189ca2e3a0c3f00cfb1fe45ca1d2f11bf3a709c7d35bb7b",
@@ -40,20 +40,20 @@
     "signature": "o/twLnMilwUaZswXZOQKRR/5QwW/RGCp92RIxbQLWN9IJvffbUvam0mtADUwFefSSVDGeKIUUA84hERqAxdNDA=="
   },
   "layout-fix": {
-    "sha256": "b2b32ec6997da9f5421e86b8087e14b36abd0c9f614c6d2853bd516ffd3cc569",
-    "signature": "u9d7uLHO4dqYUlCiiPl4bOPPRCMkcXD04QYroDyVxKAXPOg1mABvqOfwVv0JWBDad4IMbpZRP/S6VWYZq4DuAQ=="
+    "sha256": "bb16bd94a5a94e30d0205753ee3043651f40127d6c45f557fcf686feb4674ab1",
+    "signature": "bvcRMBOMxuvyCF407ZaM+5ecNfwIpib12EEHXtt+WGT6UnlRp/7OnIKG97aeXyenCGHLLGL48VfVe+aDnIHvBw=="
   },
   "lyrics-cleaner": {
-    "sha256": "6a2455bbbe8f2cefde8170366ef0abc274d31aeb2d5df001c353927f5dc1c96a",
-    "signature": "v+0GAK/8aDOExquYqDC0OVjjh1gins5mO6SuUx02cGZlkQUpNsiT983R7thJCZxOlmXD3envduTO3AoZEUElBg=="
+    "sha256": "f97b15941e13abc44d5cdcd2a7d307f1a21d9e14dbdad07a2f27f031d35fa143",
+    "signature": "QBPnMDY37kHSzkX5CI8LpvxomE0ktL2mhwnellpe5mCPzgd+OnkB9LxN2LDHjCvYkSyuRkeoDSBpYmQGlcPtBQ=="
   },
   "mini_avatar": {
     "sha256": "6f255753ce27536280e3b56027e7f53f7943b2ab333d4ac74de39cb7dab61b73",
     "signature": "99SOTg5CQW2vgRvj6FxTFqT9kR0u3m7pCJ68j/ueUhkTmjPvC16JE3sAJ9uCJ9Vk4HoAQ99L82iWjlK2F9SbBw=="
   },
   "minimal-ui": {
-    "sha256": "cb9d805d079f9cb3b7a46ba0976834f110daa77969c0fadde218216929839e39",
-    "signature": "HfCw/HfXhAvsQzhbzbzpAiTkjQGwNfCBtgQDbwK5FSD3cpK+MCTRJL32nYjTyzSTJe2aVKgBrvOo7cEolnE4BQ=="
+    "sha256": "5172dbca31f5234e85e809717140ca4ab0bed8ec633a0f0e9501080998aed15f",
+    "signature": "mLFFu3BZBwz1okA2Tqm03/7by2tVEUdEtGSipVlEou8Wmc7MFyEWC1Nj5iG91g/xoEXGJLBlysJBZGmXLAycAQ=="
   },
   "petpet": {
     "sha256": "d22aea32a34f25495c58f7d09821b69b9a2437449a5b642620b726209ace06c2",
@@ -76,16 +76,16 @@
     "signature": "LZ5/5f4lidS78Tw2NNLBL69UACsWInpl5u25H9t4JFm+W271IRfbx1fbu5gMe64aHCfnETLNNiyeUM29Q8l2BA=="
   },
   "smart-quotes": {
-    "sha256": "9ce351e05878d7ae36ac1818739fceba38c2e39373418f31ec5d3cd9af005c84",
-    "signature": "9StWy9ra23YhmNPhioo6CjcJ9PO0SAW/RtBC5j5wafKjxq1T8ByD1wZGzsQ1AjZe9d7LvbfefPcifsDkA0gZBw=="
+    "sha256": "67c6b11c24a8e44b59dfded15868d24aa17dd6f0cdba25b8be7a0026e9829f69",
+    "signature": "PZPuO6VLBbGZXo3+L1Q/49IE32hXrTffjmhsoJ3QAij9K1MyIiMKS7o43QJHUM1FLIGVcq+iGVmf4GxEanHJBg=="
   },
   "smart_auto_archiver": {
     "sha256": "e718d2fe48784f7b96abd70a62f2b685b55e7d61f3304f373ed3eeb776b3cdf1",
     "signature": "0bkhxgYM+o4YSo1104YIZtFVXH7YAg9kClI1ZkFaz3ONfqQ3/hVXvLjsM+NdO3ZjoiAnwHknHmfDSFtINk3HCA=="
   },
   "text-shortcuts": {
-    "sha256": "56e19fb1f31e5aee448dd7bab6bde660506ebfbb57c2c03ee5f9b6d905f42d58",
-    "signature": "3+q1sdMg183mcyKBRur2cE157Vb/JZSxdZYyYyQBY6bsfVziJle3f8ZNZmrWrBQF3OfwVd/jX9MncFOMB4MqDg=="
+    "sha256": "a70e7629f3d480507db2546d73ce20a47001212d6ffca5668f443f790716282d",
+    "signature": "Gv16MGLytGILJ/TsCm6N14FYnVjffavOylt+HO/LX7o2mffmdY6TuZWStjj4vl3bQ00Zv+ujL8vRxIOdlQfjCA=="
   },
   "unlim_accounts": {
     "sha256": "eefee1f55d471fb50d885e1aee444e2784442956cf34723975c6378fc080667a",
