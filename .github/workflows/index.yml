@@ -3,7 +3,7 @@ name: Catalog
 on:
   push:
     branches: [main]
-    paths: ["plugins/**", "tools/**", ".github/workflows/index.yml"]
+    paths: ["plugins/**", "fonts/**", "tools/**", ".github/workflows/index.yml"]
   pull_request:
     paths: ["plugins/**", "tools/**"]
 
@@ -19,13 +19,15 @@ jobs:
         run: node tools/test_plugins.js
       - name: Build index.json
         run: python3 tools/build_index.py
+      - name: Build fonts/index.json
+        run: python3 tools/build_fonts_index.py
       - name: Commit index.json
         if: github.event_name == 'push'
         run: |
-          if ! git diff --quiet -- index.json; then
+          if ! git diff --quiet -- index.json fonts/index.json; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.json
-            git commit -m "Rebuild index.json"
+            git add index.json fonts/index.json
+            git commit -m "Rebuild catalog indexes"
             git push
           fi
