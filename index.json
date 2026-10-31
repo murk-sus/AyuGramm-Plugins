@@ -1,0 +1,75 @@
+{
+  "format": "ayugram-plugin-catalog",
+  "version": 1,
+  "plugins": [
+    {
+      "id": "clean-links",
+      "name": "Clean links",
+      "author": "murk-sus",
+      "version": "1.0",
+      "description": "Removes tracking parameters (utm_*, fbclid, gclid, si, igsh…) from links you send, so they do not reveal where you found them.",
+      "tags": [
+        "privacy",
+        "links"
+      ],
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/clean-links/plugin.ayu.js",
+      "sha256": "e07ebe037d2789c018543d210f3ee3b10544c38173a315dd32209c4555983200",
+      "size": 1104
+    },
+    {
+      "id": "layout-fix",
+      "name": "Layout fix",
+      "author": "murk-sus",
+      "version": "1.0",
+      "description": "Fixes text typed in the wrong keyboard layout: \"ghbdtn\" → \"привет\", \"руддщ\" → \"hello\". Only whole messages that clearly look mistyped are changed.",
+      "tags": [
+        "text",
+        "keyboard"
+      ],
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/layout-fix/plugin.ayu.js",
+      "sha256": "b2b32ec6997da9f5421e86b8087e14b36abd0c9f614c6d2853bd516ffd3cc569",
+      "size": 1967
+    },
+    {
+      "id": "minimal-ui",
+      "name": "Minimal UI",
+      "author": "murk-sus",
+      "version": "1.0",
+      "description": "A calmer Telegram: hides stories, similar channels, Premium statuses, the greeting sticker and the fast-share button while enabled. Turning the plugin off brings everything back.",
+      "tags": [
+        "interface"
+      ],
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/minimal-ui/plugin.ayu.js",
+      "sha256": "cb9d805d079f9cb3b7a46ba0976834f110daa77969c0fadde218216929839e39",
+      "size": 494
+    },
+    {
+      "id": "smart-quotes",
+      "name": "Smart quotes",
+      "author": "murk-sus",
+      "version": "1.1",
+      "description": "Straight quotes become «ёлочки» in Russian text and “curly” quotes otherwise; \"--\" becomes an em dash.",
+      "tags": [
+        "text",
+        "typography"
+      ],
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart-quotes/plugin.ayu.js",
+      "sha256": "9ce351e05878d7ae36ac1818739fceba38c2e39373418f31ec5d3cd9af005c84",
+      "size": 656
+    },
+    {
+      "id": "text-shortcuts",
+      "name": "Text shortcuts",
+      "author": "murk-sus",
+      "version": "1.0",
+      "description": "Expands shortcuts in outgoing messages: :shrug: → ¯\\_(ツ)_/¯, :lenny: → ( ͡° ͜ʖ ͡°), :tableflip: → (╯°□°)╯︵ ┻━┻, ->, <-, (c), (tm) and more.",
+      "tags": [
+        "text",
+        "fun"
+      ],
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/text-shortcuts/plugin.ayu.js",
+      "sha256": "56e19fb1f31e5aee448dd7bab6bde660506ebfbb57c2c03ee5f9b6d905f42d58",
+      "size": 1156
+    }
+  ]
+}
