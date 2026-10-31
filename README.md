@@ -14,6 +14,18 @@ AyuGram downloads [`index.json`](index.json) from this repository and lists ever
 | [Smart quotes](plugins/smart-quotes/plugin.ayu.js) | murk-sus | 1.1 | Straight quotes become «ёлочки» in Russian text and “curly” quotes otherwise; "--" becomes an em dash |
 | [Text shortcuts](plugins/text-shortcuts/plugin.ayu.js) | murk-sus | 1.0 | Expands shortcuts in outgoing messages: :shrug: → ¯\_(ツ)_/¯, :lenny: → ( ͡° ͜ʖ ͡°), :tableflip: → (╯°□°)╯︵ ┻━┻, ->, <-, (c), (tm) and more |
 
+## Python plugins
+
+| Plugin | Author | Version | What it does |
+|---|---|---|---|
+| [Lyrics cleaner](plugins/lyrics-cleaner/plugin.ayu.py) | murk-sus | 1.0 | Removes "[Verse 1]", "Chorus:", "(x2)" and similar labels from song lyrics; switches in Settings → AyuGram → Lyrics sources. **inject** |
+
+## Rust plugins (WebAssembly)
+
+| Plugin | Author | Version | What it does |
+|---|---|---|---|
+| [Emoji shortcuts](plugins/emoji-shortcuts-rs/plugin.wasm) ([source](plugins-src/emoji-shortcuts-rs)) | murk-sus | 1.0 | `:fire:`, `:heart:`, `:ok:`, `:100:` and other shortcuts become emoji in messages you send |
+
 ## Native plugins (`.iosplug`)
 
 Cards for the plugins built into AyuGram. Installing one switches the native adapter on; the
@@ -66,6 +78,51 @@ ayu.hooks.before(ayu.hooks.points.outgoingText, (text, ctx) => text.trim());
 The full API is in the [AyuGramm-IOS docs](https://github.com/dsn2fvhmn4-lgtm/AyuGramm-IOS/blob/main/docs/CODE_PLUGINS.md):
 intercepting and replacing outgoing text, switching features off, events, storage, toasts and timers.
 
+## Python plugins
+
+One file, `plugins/<id>/plugin.ayu.py`, with the same header as `#` comments. The `ayu` object
+is already there:
+
+```python
+# ==AyuPlugin==
+# @id my-plugin
+# @name My plugin
+# @author your-github-name
+# @version 1.0
+# @description What it does.
+# ==/AyuPlugin==
+
+@ayu.hooks.before(ayu.hooks.points.outgoing_text)
+def trim(text, ctx):
+    return text.strip()
+```
+
+The interpreter is [PocketPy](https://github.com/pocketpy/pocketpy) (a Python 3 subset) without
+`os`, `io`, files or file imports. `str.lower()`/`upper()` only fold Latin letters.
+
+## Rust plugins
+
+Use the dependency-free SDK in [`sdk/rust`](sdk/rust) and build a `cdylib` for WebAssembly:
+
+```sh
+cargo build --release --target wasm32-unknown-unknown
+cp target/wasm32-unknown-unknown/release/my_plugin.wasm plugins/my-plugin/plugin.wasm
+```
+
+The plugin describes itself with `ayugram_plugin::manifest!(br#"{...}"#)` and registers hooks in
+`#[no_mangle] pub extern "C" fn ayu_init()`. See [`plugins-src/emoji-shortcuts-rs`](plugins-src/emoji-shortcuts-rs).
+
+## Safe zone: injecting plugins
+
+Ordinary plugins (outgoing text, switching features off, storage, toasts, settings) may come from
+anywhere. Plugins that **inject** into the app — `ayu.player` and the `lyrics.text` hook — declare
+`@inject true` (`"inject": true` in a Rust manifest) and are installed only when signed by
+AyuGram: every plugin here is signed (`signatures.json`, Ed25519) after review. An unsigned
+injecting plugin installs only when the user enables *Injecting plugins from unofficial sources*
+in the developer settings and accepts that the responsibility is entirely theirs.
+
+After a pull request is merged the maintainer re-signs: `python3 tools/sign.py && python3 tools/build_index.py`.
+
 ## Submitting a plugin
 
 1. Copy [`template/plugin.ayu.js`](template/plugin.ayu.js) to `plugins/<your-id>/plugin.ayu.js`
@@ -82,7 +139,7 @@ Rules: local work only, no data collection; a plugin must do what its descriptio
 
 ## Security
 
-Code plugins run as code, but in their own JavaScriptCore virtual machine. They have **no access
+Code plugins run as code, but each in its own sandbox: JavaScriptCore, PocketPy or the WAMR WebAssembly interpreter. They have **no access
 to the network, the account, files or sending messages**: only the text passed to their hooks and
 their own storage. A plugin that does not answer in time is switched off automatically.
 Install only what you trust, and read the code — it is short.

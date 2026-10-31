@@ -14,7 +14,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/acd/plugin.iosplug",
       "sha256": "77f409294eaef31e08cf38057e15381879fae4f5a8368c8a8c6f1c81eb2a7010",
-      "size": 250
+      "size": 250,
+      "signature": "HicSiTDVVYp9SUtvlY+jdoSCkh7POvnk0fiAzMo6Z0KtV8W9/+lNsRFWqogPvTlQt2pkLS0micZINQ3UiKuQCg=="
     },
     {
       "id": "camera_flip",
@@ -28,7 +29,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/camera_flip/plugin.iosplug",
       "sha256": "90f7ba9538d3b133ede72e4436d709c4928432e067ce98cd4bee8887ff9e0452",
-      "size": 2575
+      "size": 2575,
+      "signature": "oJ0cdxetk9Hdcg7rhH24UymcYTGebtCAc8ldeCrXsVUiQ3LWb769qXPd5Jl92/RGuWpvE449r4dcSJmC2MRhDA=="
     },
     {
       "id": "chat_colors",
@@ -42,7 +44,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat_colors/plugin.iosplug",
       "sha256": "fccea2135ffd523a6f1edaab79ccbc869a3707c4b1ec388c67cd8a98dd278a92",
-      "size": 2744
+      "size": 2744,
+      "signature": "8ZW/jI37y3jtJBs0gZ9q5z6dEOOOpvQYnim2i6UjHTJbg66PRUBiTcEDlu8WMVzdRL1ubowwMUbhuSu9Z/uFDA=="
     },
     {
       "id": "clean-links",
@@ -55,9 +58,11 @@
         "links"
       ],
       "kind": "js",
+      "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/clean-links/plugin.ayu.js",
       "sha256": "e07ebe037d2789c018543d210f3ee3b10544c38173a315dd32209c4555983200",
-      "size": 1104
+      "size": 1104,
+      "signature": "rzg20hhthkTXB6oDTfi1ikIG4msNBo/U9fnurrk6Nm+VXeYUcWW4l4jnVNY/qRdtP8hbzTAdSqjrpRO190ouDg=="
     },
     {
       "id": "del_my_msgs",
@@ -71,7 +76,26 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/del_my_msgs/plugin.iosplug",
       "sha256": "17ddeef8f91d1152ac35b7b0010f25fc20feba1af844cc744454dd9deca7d5b9",
-      "size": 263
+      "size": 263,
+      "signature": "MP58ldG2b4Ltg49RupFJL32REGz/73r4zEFyjxoHzfvObGjmH0Is4rPeuRYbXM44gwIjqGqP9hbZfCRWCyVsAQ=="
+    },
+    {
+      "id": "emoji-shortcuts-rs",
+      "name": "Emoji shortcuts (Rust)",
+      "author": "murk-sus",
+      "version": "1.0",
+      "description": "Rust plugin: :fire:, :heart:, :ok:, :lol:, :100: and other shortcuts become emoji in messages you send.",
+      "tags": [
+        "text",
+        "emoji",
+        "rust"
+      ],
+      "kind": "wasm",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/emoji-shortcuts-rs/plugin.wasm",
+      "sha256": "1301d58753ee5d6d10cf8964e0f59826e26ff0d006249f152076732c76e918ae",
+      "size": 59904,
+      "signature": "Nl+w2P3nRDwmoolOrdBWrg2PvEKKN8CtAep+n57zb1FE7XDTZXVoMNdQnoidc0Ic1tEkuv2/l/kxD0TcUSQLDw=="
     },
     {
       "id": "formatted_copy",
@@ -85,7 +109,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/formatted_copy/plugin.iosplug",
       "sha256": "82b258f996e1996a8189ca2e3a0c3f00cfb1fe45ca1d2f11bf3a709c7d35bb7b",
-      "size": 2267
+      "size": 2267,
+      "signature": "Nf/TqTxak4UjeoT3I65ApxNhMzo1PuLIrlooWZQC1oUPmkW6fvBcw/Bl3WtaDAfs7WFyKTTC+BdAWtEIjWpABA=="
     },
     {
       "id": "game_arcade",
@@ -99,7 +124,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/game_arcade/plugin.iosplug",
       "sha256": "e782531caed568006672834cd3a6261be880c9d81509314f23eb062666bb7411",
-      "size": 2342
+      "size": 2342,
+      "signature": "b/3ZERxiok38W1YdvsQlOuG0itko00DCmpmINppu5Q+hsYsUzp58R06HUcWWZmIy7VzY2lOHLuyK9O4By/kTCw=="
     },
     {
       "id": "group_mentions",
@@ -113,7 +139,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/group_mentions/plugin.iosplug",
       "sha256": "dad7e67888412f2ae28fb877e2c04a8d9cb98d5e002c423f8888fb07367b19d4",
-      "size": 2051
+      "size": 2051,
+      "signature": "T3p1s3fqTnBXkSC0L/LyA2avEWFUzTkQ9zxJcdwfjj6cvVZf36gDT8u64qnBm6AahmQKFvLqeggVoScMSIPqCA=="
     },
     {
       "id": "hide_attach_buttons",
@@ -127,7 +154,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/hide_attach_buttons/plugin.iosplug",
       "sha256": "4e85a488a95dbd3337f38bb6fbe74ee9e1c94f230ebc031580faa1316aa56935",
-      "size": 257
+      "size": 257,
+      "signature": "o/twLnMilwUaZswXZOQKRR/5QwW/RGCp92RIxbQLWN9IJvffbUvam0mtADUwFefSSVDGeKIUUA84hERqAxdNDA=="
     },
     {
       "id": "layout-fix",
@@ -140,9 +168,28 @@
         "keyboard"
       ],
       "kind": "js",
+      "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/layout-fix/plugin.ayu.js",
       "sha256": "b2b32ec6997da9f5421e86b8087e14b36abd0c9f614c6d2853bd516ffd3cc569",
-      "size": 1967
+      "size": 1967,
+      "signature": "u9d7uLHO4dqYUlCiiPl4bOPPRCMkcXD04QYroDyVxKAXPOg1mABvqOfwVv0JWBDad4IMbpZRP/S6VWYZq4DuAQ=="
+    },
+    {
+      "id": "lyrics-cleaner",
+      "name": "Lyrics cleaner",
+      "author": "murk-sus",
+      "version": "1.0",
+      "description": "Python plugin: removes \"[Куплет 1]\", \"Припев:\", \"(x2)\" and similar labels from song lyrics. Switches in Settings → AyuGram → Lyrics sources.",
+      "tags": [
+        "lyrics",
+        "python"
+      ],
+      "kind": "python",
+      "injects": true,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/lyrics-cleaner/plugin.ayu.py",
+      "sha256": "6a2455bbbe8f2cefde8170366ef0abc274d31aeb2d5df001c353927f5dc1c96a",
+      "size": 2882,
+      "signature": "v+0GAK/8aDOExquYqDC0OVjjh1gins5mO6SuUx02cGZlkQUpNsiT983R7thJCZxOlmXD3envduTO3AoZEUElBg=="
     },
     {
       "id": "mini_avatar",
@@ -156,7 +203,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/mini_avatar/plugin.iosplug",
       "sha256": "6f255753ce27536280e3b56027e7f53f7943b2ab333d4ac74de39cb7dab61b73",
-      "size": 228
+      "size": 228,
+      "signature": "99SOTg5CQW2vgRvj6FxTFqT9kR0u3m7pCJ68j/ueUhkTmjPvC16JE3sAJ9uCJ9Vk4HoAQ99L82iWjlK2F9SbBw=="
     },
     {
       "id": "minimal-ui",
@@ -168,9 +216,11 @@
         "interface"
       ],
       "kind": "js",
+      "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/minimal-ui/plugin.ayu.js",
       "sha256": "cb9d805d079f9cb3b7a46ba0976834f110daa77969c0fadde218216929839e39",
-      "size": 494
+      "size": 494,
+      "signature": "HfCw/HfXhAvsQzhbzbzpAiTkjQGwNfCBtgQDbwK5FSD3cpK+MCTRJL32nYjTyzSTJe2aVKgBrvOo7cEolnE4BQ=="
     },
     {
       "id": "petpet",
@@ -184,7 +234,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/petpet/plugin.iosplug",
       "sha256": "d22aea32a34f25495c58f7d09821b69b9a2437449a5b642620b726209ace06c2",
-      "size": 2303
+      "size": 2303,
+      "signature": "XtGzJ/wGWO9X5SqnVzDasWWDx+00WjjdXMjsjUOVswalF9omPrumtlIUv4xfHE9pc2EGwR5W+TxH7VqzPnWkAw=="
     },
     {
       "id": "pill_labels",
@@ -198,7 +249,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/pill_labels/plugin.iosplug",
       "sha256": "9df804418ba589bb588065312d1d8278cddc7a35a9aa4a788309464f4d1bc0d6",
-      "size": 250
+      "size": 250,
+      "signature": "Lyw7qO2lgz+b4S7t0P0rl8fepB2SVWjHlIP5DTmNv1ICZo+lw5Ckv5RCfZHClQypfKV9fN8zl1y6Y00SuCbJDw=="
     },
     {
       "id": "reactions_total",
@@ -212,7 +264,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/reactions_total/plugin.iosplug",
       "sha256": "60d04f5ce1f5acbde483af2d5099c3ffab06b8609237b1dc89919ee60910d645",
-      "size": 2162
+      "size": 2162,
+      "signature": "EDHlnzGH7cBniVgJyUFCbrCo3rI+jahl2F/kQxUfvkZXUS/uOv8OZqQMmv4J4GUC6yrlVjFLSVJN6aSoJL87AQ=="
     },
     {
       "id": "search_plus",
@@ -226,7 +279,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/search_plus/plugin.iosplug",
       "sha256": "48d732d0359334850eca62c335908610b0556b363c4b1891b020e5570a4bc01a",
-      "size": 2630
+      "size": 2630,
+      "signature": "ldTG+NZ0FqlGlKkbMDAWo6Zw6xHxIA+ijPEjfpJhiEzeyfLbPoEOeo+tNPkdsUeGT7YUMazwRAKGRNK2wpWXBQ=="
     },
     {
       "id": "service_cleaner",
@@ -240,7 +294,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/service_cleaner/plugin.iosplug",
       "sha256": "a583f76d7e05b8e4318ca2a19de64ef4eb8d62d8ff6c399d49926d54f0b7d402",
-      "size": 284
+      "size": 284,
+      "signature": "LZ5/5f4lidS78Tw2NNLBL69UACsWInpl5u25H9t4JFm+W271IRfbx1fbu5gMe64aHCfnETLNNiyeUM29Q8l2BA=="
     },
     {
       "id": "smart-quotes",
@@ -253,9 +308,11 @@
         "typography"
       ],
       "kind": "js",
+      "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart-quotes/plugin.ayu.js",
       "sha256": "9ce351e05878d7ae36ac1818739fceba38c2e39373418f31ec5d3cd9af005c84",
-      "size": 656
+      "size": 656,
+      "signature": "9StWy9ra23YhmNPhioo6CjcJ9PO0SAW/RtBC5j5wafKjxq1T8ByD1wZGzsQ1AjZe9d7LvbfefPcifsDkA0gZBw=="
     },
     {
       "id": "smart_auto_archiver",
@@ -269,7 +326,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart_auto_archiver/plugin.iosplug",
       "sha256": "e718d2fe48784f7b96abd70a62f2b685b55e7d61f3304f373ed3eeb776b3cdf1",
-      "size": 255
+      "size": 255,
+      "signature": "0bkhxgYM+o4YSo1104YIZtFVXH7YAg9kClI1ZkFaz3ONfqQ3/hVXvLjsM+NdO3ZjoiAnwHknHmfDSFtINk3HCA=="
     },
     {
       "id": "text-shortcuts",
@@ -282,9 +340,11 @@
         "fun"
       ],
       "kind": "js",
+      "injects": false,
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/text-shortcuts/plugin.ayu.js",
       "sha256": "56e19fb1f31e5aee448dd7bab6bde660506ebfbb57c2c03ee5f9b6d905f42d58",
-      "size": 1156
+      "size": 1156,
+      "signature": "3+q1sdMg183mcyKBRur2cE157Vb/JZSxdZYyYyQBY6bsfVziJle3f8ZNZmrWrBQF3OfwVd/jX9MncFOMB4MqDg=="
     },
     {
       "id": "unlim_accounts",
@@ -298,7 +358,8 @@
       "kind": "iosplug",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/unlim_accounts/plugin.iosplug",
       "sha256": "eefee1f55d471fb50d885e1aee444e2784442956cf34723975c6378fc080667a",
-      "size": 2036
+      "size": 2036,
+      "signature": "cchncFCuUASH4i7I+3OcwU0EwiDdR+tq54hZbBS9Wse/1C8sZVfaAbZ6IaV+HTAAORlyvFIR+c7yiRUUfsSWCw=="
     }
   ]
 }
