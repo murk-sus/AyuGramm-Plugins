@@ -1,7 +1,7 @@
 // ==AyuPlugin==
 // @id smart-quotes
 // @name Smart quotes
-// @author murk-sus
+// @author murk-sus & dsn2fvhmn4-lgtm
 // @version 1.1
 // @description Straight quotes become «ёлочки» in Russian text and “curly” quotes otherwise; "--" becomes an em dash.
 // @tags text, typography

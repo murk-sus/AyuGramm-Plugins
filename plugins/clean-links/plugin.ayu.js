@@ -1,7 +1,7 @@
 // ==AyuPlugin==
 // @id clean-links
 // @name Clean links
-// @author murk-sus
+// @author murk-sus & dsn2fvhmn4-lgtm
 // @version 1.0
 // @description Removes tracking parameters (utm_*, fbclid, gclid, si, igsh…) from links you send, so they do not reveal where you found them.
 // @tags privacy, links

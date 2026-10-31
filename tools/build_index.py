@@ -22,6 +22,8 @@ RAW = "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/"
 ID = re.compile(r"^[a-z0-9_-]{1,64}$")
 REQUIRED = ("id", "name", "author", "version", "description")
 MAX_BYTES = 512 * 1024
+# Every plugin in this catalog is made and maintained by the AyuGramm team.
+CATALOG_AUTHOR = "murk-sus & dsn2fvhmn4-lgtm"
 MAX_IOSPLUG_BYTES = 64 * 1024
 MAX_WASM_BYTES = 2 * 1024 * 1024
 
@@ -179,6 +181,7 @@ def main():
         return 1
     # Official plugins: the signature from signatures.json, only while the file is unchanged.
     for entry in entries:
+        entry["author"] = CATALOG_AUTHOR
         signed = known.get(entry["id"])
         if signed and signed.get("sha256") == entry["sha256"]:
             entry["signature"] = signed["signature"]
