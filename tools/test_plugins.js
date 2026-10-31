@@ -38,7 +38,8 @@ function load(file) {
 const root = path.join(__dirname, '..', 'plugins');
 const results = {};
 for (const id of fs.readdirSync(root)) {
-    results[id] = load(path.join(root, id, 'plugin.ayu.js'));
+    const file = path.join(root, id, 'plugin.ayu.js');
+    if (fs.existsSync(file)) results[id] = load(file);
 }
 const known = new Set(['stories', 'similarChannels', 'premiumStatuses', 'greetingSticker', 'fastShare', 'messageShot', 'reactionPicker', 'readSummary', 'editedInfo', 'messageDetails', 'unreadCounters', 'openLinkWarning', 'doubleTapToEdit', 'formattingToolbar', 'keyboardHideOnScroll']);
 for (const [id, { calls }] of Object.entries(results)) {

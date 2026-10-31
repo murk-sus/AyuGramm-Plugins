@@ -3,6 +3,48 @@
   "version": 1,
   "plugins": [
     {
+      "id": "acd",
+      "name": "Album Cover Downloader",
+      "author": "@ka1Plugins",
+      "version": "1.0",
+      "description": "Сохраняет доступное превью обложки аудиофайла в Фото.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/acd/plugin.iosplug",
+      "sha256": "77f409294eaef31e08cf38057e15381879fae4f5a8368c8a8c6f1c81eb2a7010",
+      "size": 250
+    },
+    {
+      "id": "camera_flip",
+      "name": "Camera Flip",
+      "author": "@its240hz (original)",
+      "version": "0.2.0-ios.1",
+      "description": "Switch the round-video camera using vertical swipes or double taps. Gesture mode and haptic feedback are configurable.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/camera_flip/plugin.iosplug",
+      "sha256": "90f7ba9538d3b133ede72e4436d709c4928432e067ce98cd4bee8887ff9e0452",
+      "size": 2575
+    },
+    {
+      "id": "chat_colors",
+      "name": "Chat Colors",
+      "author": "@lerowc & @lerowplug (original)",
+      "version": "1.0-ios.1",
+      "description": "Per-chat colors in the chat list, nine presets, custom HEX, brightness, colored-chat management and reset.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat_colors/plugin.iosplug",
+      "sha256": "fccea2135ffd523a6f1edaab79ccbc869a3707c4b1ec388c67cd8a98dd278a92",
+      "size": 2744
+    },
+    {
       "id": "clean-links",
       "name": "Clean links",
       "author": "murk-sus",
@@ -12,9 +54,80 @@
         "privacy",
         "links"
       ],
+      "kind": "js",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/clean-links/plugin.ayu.js",
       "sha256": "e07ebe037d2789c018543d210f3ee3b10544c38173a315dd32209c4555983200",
       "size": 1104
+    },
+    {
+      "id": "del_my_msgs",
+      "name": "Delete My Messages",
+      "author": "@akresik",
+      "version": "1.0",
+      "description": "Поиск и удаление своих сообщений в чате после подтверждения.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/del_my_msgs/plugin.iosplug",
+      "sha256": "17ddeef8f91d1152ac35b7b0010f25fc20feba1af844cc744454dd9deca7d5b9",
+      "size": 263
+    },
+    {
+      "id": "formatted_copy",
+      "name": "formatted copy",
+      "author": "@meatdisk",
+      "version": "1.0.0-ios.1",
+      "description": "Native message copying with author, optional date/time, media labels and available reply quotes.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/formatted_copy/plugin.iosplug",
+      "sha256": "82b258f996e1996a8189ca2e3a0c3f00cfb1fe45ca1d2f11bf3a709c7d35bb7b",
+      "size": 2267
+    },
+    {
+      "id": "game_arcade",
+      "name": "Arcade Games",
+      "author": "@Art_727 & @lerowplug",
+      "version": "1.1",
+      "description": "2048, Flappy Bird and Chrome Dino through the existing native Arcade Games bridge.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/game_arcade/plugin.iosplug",
+      "sha256": "e782531caed568006672834cd3a6261be880c9d81509314f23eb062666bb7411",
+      "size": 2342
+    },
+    {
+      "id": "group_mentions",
+      "name": "Group Mentions",
+      "author": "@Hikerys",
+      "version": "1.2-ios.1",
+      "description": "Native saved username groups with whole-command expansion and a per-chat cooldown.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/group_mentions/plugin.iosplug",
+      "sha256": "dad7e67888412f2ae28fb877e2c04a8d9cb98d5e002c423f8888fb07367b19d4",
+      "size": 2051
+    },
+    {
+      "id": "hide_attach_buttons",
+      "name": "HideAttachButtons",
+      "author": "@optimist_opti × @KUNSESHBOY",
+      "version": "1.0",
+      "description": "Скрывает выбранные разделы меню вложений.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/hide_attach_buttons/plugin.iosplug",
+      "sha256": "4e85a488a95dbd3337f38bb6fbe74ee9e1c94f230ebc031580faa1316aa56935",
+      "size": 257
     },
     {
       "id": "layout-fix",
@@ -26,9 +139,24 @@
         "text",
         "keyboard"
       ],
+      "kind": "js",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/layout-fix/plugin.ayu.js",
       "sha256": "b2b32ec6997da9f5421e86b8087e14b36abd0c9f614c6d2853bd516ffd3cc569",
       "size": 1967
+    },
+    {
+      "id": "mini_avatar",
+      "name": "Mini Avatar",
+      "author": "@KUNSESHBOY",
+      "version": "1.0",
+      "description": "Размер аватаров около сообщений: 18–34 точки.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/mini_avatar/plugin.iosplug",
+      "sha256": "6f255753ce27536280e3b56027e7f53f7943b2ab333d4ac74de39cb7dab61b73",
+      "size": 228
     },
     {
       "id": "minimal-ui",
@@ -39,9 +167,80 @@
       "tags": [
         "interface"
       ],
+      "kind": "js",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/minimal-ui/plugin.ayu.js",
       "sha256": "cb9d805d079f9cb3b7a46ba0976834f110daa77969c0fadde218216929839e39",
       "size": 494
+    },
+    {
+      "id": "petpet",
+      "name": "petpet",
+      "author": "@limeplug",
+      "version": "1.0.6-ios.1",
+      "description": "Native petpet GIF composition from a chat avatar or an image in Files, with preview and configurable resolution/frame delay.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/petpet/plugin.iosplug",
+      "sha256": "d22aea32a34f25495c58f7d09821b69b9a2437449a5b642620b726209ace06c2",
+      "size": 2303
+    },
+    {
+      "id": "pill_labels",
+      "name": "Pill Labels",
+      "author": "@Persik_dll & claude",
+      "version": "1.0",
+      "description": "Обводка и фон подписей полей профиля, шесть цветов.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/pill_labels/plugin.iosplug",
+      "sha256": "9df804418ba589bb588065312d1d8278cddc7a35a9aa4a788309464f4d1bc0d6",
+      "size": 250
+    },
+    {
+      "id": "reactions_total",
+      "name": "Reactions Total",
+      "author": "Daxo-Developer @Daxo_OS",
+      "version": "2.0.0-ios.1",
+      "description": "Reaction totals in the message timestamp line, with compact counts, paid-reaction and channel filters.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/reactions_total/plugin.iosplug",
+      "sha256": "60d04f5ce1f5acbde483af2d5099c3ffab06b8609237b1dc89919ee60910d645",
+      "size": 2162
+    },
+    {
+      "id": "search_plus",
+      "name": "Search+ for iOS",
+      "author": "@SearchPlusss (original)",
+      "version": "2.6.1-ios.2",
+      "description": "Multi-term search in the current chat/topic. The API 9 base app also provides author, date-range and media-type filters.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/search_plus/plugin.iosplug",
+      "sha256": "48d732d0359334850eca62c335908610b0556b363c4b1891b020e5570a4bc01a",
+      "size": 2630
+    },
+    {
+      "id": "service_cleaner",
+      "name": "Service Cleaner",
+      "author": "Автор: @PLOXOI_RRO",
+      "version": "1.0",
+      "description": "Удаление загруженных служебных сообщений после подтверждения.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/service_cleaner/plugin.iosplug",
+      "sha256": "a583f76d7e05b8e4318ca2a19de64ef4eb8d62d8ff6c399d49926d54f0b7d402",
+      "size": 284
     },
     {
       "id": "smart-quotes",
@@ -53,9 +252,24 @@
         "text",
         "typography"
       ],
+      "kind": "js",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart-quotes/plugin.ayu.js",
       "sha256": "9ce351e05878d7ae36ac1818739fceba38c2e39373418f31ec5d3cd9af005c84",
       "size": 656
+    },
+    {
+      "id": "smart_auto_archiver",
+      "name": "Auto Archive Chats",
+      "author": "@nainraft",
+      "version": "1.0",
+      "description": "Архивирует неактивные чаты при запуске приложения.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart_auto_archiver/plugin.iosplug",
+      "sha256": "e718d2fe48784f7b96abd70a62f2b685b55e7d61f3304f373ed3eeb776b3cdf1",
+      "size": 255
     },
     {
       "id": "text-shortcuts",
@@ -67,9 +281,24 @@
         "text",
         "fun"
       ],
+      "kind": "js",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/text-shortcuts/plugin.ayu.js",
       "sha256": "56e19fb1f31e5aee448dd7bab6bde660506ebfbb57c2c03ee5f9b6d905f42d58",
       "size": 1156
+    },
+    {
+      "id": "unlim_accounts",
+      "name": "Unlim Accounts",
+      "author": "@rezolvePlugins",
+      "version": "1.0",
+      "description": "Raises the local client add-account limit to 999 through the existing iOS bridge.",
+      "tags": [
+        "native"
+      ],
+      "kind": "iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/unlim_accounts/plugin.iosplug",
+      "sha256": "eefee1f55d471fb50d885e1aee444e2784442956cf34723975c6378fc080667a",
+      "size": 2036
     }
   ]
 }
