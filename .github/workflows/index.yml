@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Test plugins
         run: node tools/test_plugins.js
+      - name: Validate headers, permissions and checksums
+        run: node tools/validate.mjs
       - name: Build index.json
         run: python3 tools/build_index.py
       - name: Commit index.json
