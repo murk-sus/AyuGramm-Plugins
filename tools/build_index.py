@@ -27,6 +27,8 @@ MAX_BYTES = 512 * 1024
 CATALOG_AUTHOR = "murk-sus & dsn2fvhmn4-lgtm"
 MAX_IOSPLUG_BYTES = 64 * 1024
 MAX_WASM_BYTES = 2 * 1024 * 1024
+# A plugin folder may also hold a screenshot (and a README.md written by tools/build_readme.py).
+SCREENSHOTS = ("screenshot.png", "screenshot.jpg", "screenshot.webp")
 
 
 def signatures():
@@ -187,6 +189,9 @@ def main():
         entry["author"] = CATALOG_AUTHOR
         # plugins/<id>/meta.json, written by the team bot: who made the plugin and how to
         # describe it in the catalog. Without it the plugin is credited to the team.
+        shot = next((ROOT / "plugins" / entry["id"] / name for name in SCREENSHOTS if (ROOT / "plugins" / entry["id"] / name).is_file()), None)
+        if shot is not None:
+            entry["screenshots"] = [RAW + f"plugins/{entry['id']}/{shot.name}"]
         meta_path = ROOT / "plugins" / entry["id"] / "meta.json"
         if meta_path.is_file():
             try:

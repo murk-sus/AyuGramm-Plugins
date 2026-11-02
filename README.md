@@ -61,10 +61,10 @@ Every download is checked against the SHA-256 in [`fonts/index.json`](fonts/inde
 
 | Font | Author | What it is |
 |---|---|---|
-| [DreamFont](fonts/dream-font/font.ttf) | [@lwwlt](https://t.me/lwwlt) | Рисованный от руки. Кириллица, латиница и цифры. |
-| [Ink Italic](fonts/ink-italic/font.ttf) | [@lwwlt](https://t.me/lwwlt) | Курсив, как написанный чернилами. Кириллица, латиница и цифры. |
-| [NARROW X](fonts/narrow-x/font.ttf) | [@lwwlt](https://t.me/lwwlt) | Узкий высокий шрифт. Кириллица, латиница и цифры. |
-| [Slice Cut](fonts/slice-cut/font.ttf) | [@lwwlt](https://t.me/lwwlt) | Рубленые буквы с косым срезом. Кириллица, латиница и цифры. |
+| [DreamFont](fonts/dream-font) | [@lwwlt](https://t.me/lwwlt) | Рисованный от руки. Кириллица, латиница и цифры. |
+| [Ink Italic](fonts/ink-italic) | [@lwwlt](https://t.me/lwwlt) | Курсив, как написанный чернилами. Кириллица, латиница и цифры. |
+| [NARROW X](fonts/narrow-x) | [@lwwlt](https://t.me/lwwlt) | Узкий высокий шрифт. Кириллица, латиница и цифры. |
+| [Slice Cut](fonts/slice-cut) | [@lwwlt](https://t.me/lwwlt) | Рубленые буквы с косым срезом. Кириллица, латиница и цифры. |
 
 <!-- catalog:end -->
 

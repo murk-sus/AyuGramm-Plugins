@@ -17,6 +17,7 @@ Secrets stay on this machine, never in the repository:
   ~/.config/ayugram-bot/token             the bot token
   ~/.config/ayugram-bot/registry-key.pem  the registry signing key
   ~/.config/ayugram-bot/state.json        password hashes and conversation state
+  ~/.config/ayugram-bot/team.json         who may use the bot (edited only by OWNER, in the bot)
   ~/.config/ayugram-plugins/signing-key.pem  the plugin signing key ($AYU_SIGNING_KEY), optional
 GitHub access uses the `gh` login of this machine.
 
@@ -41,7 +42,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import catalog  # noqa: E402
 
-TEAM = {7556953433, 7864640050, 7754143736, 8276132300}
+# The owner alone decides who may use the bot; the list lives in team.json next to the token.
+OWNER = 8276132300
+TEAM = {7556953433, 7864640050, 7754143736, OWNER}  # the list before team.json existed
 CONFIG = Path(os.environ.get("AYU_BOT_CONFIG", Path.home() / ".config/ayugram-bot"))
 REPO = "murk-sus/AyuGramm-Plugins"
 REGISTRY_PATH = "registry/verified.json"
@@ -237,12 +240,83 @@ def publish(registry, message):
         github("PUT", path, body)
 
 
+# MARK: Team
+
+def team_path():
+    return CONFIG / "team.json"
+
+
+def team():
+    """Telegram IDs allowed to use the bot. The owner is always one of them."""
+    path = team_path()
+    try:
+        members = {int(member) for member in json.loads(path.read_text())["members"]} if path.is_file() else set(TEAM)
+    except (ValueError, KeyError, TypeError):
+        log("team.json is damaged; using the built-in list")
+        members = set(TEAM)
+    return members | {OWNER}
+
+
+def save_team(members):
+    path = team_path()
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(json.dumps({"members": sorted(members | {OWNER})}, indent=1))
+    os.chmod(temporary, 0o600)
+    temporary.replace(path)
+
+
+def team_menu(chat):
+    members = sorted(team())
+    lines = [f"{'👑' if member == OWNER else '•'} {member}" for member in members]
+    send(chat, "👥 Доступ к боту (плашки, шрифты, плагины):\n" + "\n".join(lines),
+         [("➕ Добавить ID", "t:add"), ("➖ Убрать ID", "t:remove"), ("⬅️ Назад", "t:back")])
+
+
+def change_team(state, chat, sender, user, text, adding):
+    if sender != OWNER:  # menus are per chat; the check that counts is here
+        user["step"] = "menu"
+        menu(chat)
+        return
+    target = text.strip().lstrip("@")
+    if not target.isascii() or not target.isdecimal() or not 0 < int(target) <= 2 ** 63 - 1:
+        send(chat, "Нужен числовой Telegram ID, например 123456789. /cancel — отмена.")
+        return
+    member = int(target)
+    members = team()
+    user["step"] = "menu"
+    if adding:
+        if member in members:
+            send(chat, f"{member} уже есть в списке.")
+        else:
+            save_team(members | {member})
+            if member in state["refused"]:
+                state["refused"].remove(member)
+            log("team add", member, "by", sender)
+            send(chat, f"✅ {member} добавлен. Пусть напишет боту /start и поставит пароль.")
+    else:
+        if member == OWNER:
+            send(chat, "Себя убрать нельзя.")
+        elif member not in members:
+            send(chat, f"{member} нет в списке.")
+        else:
+            save_team(members - {member})
+            # Access ends now: no password, no session, no half-finished upload.
+            removed = state["users"].pop(str(member), None)
+            if removed is not None:
+                drop_upload(member, {})
+            log("team remove", member, "by", sender)
+            send(chat, f"➖ {member} больше не может пользоваться ботом.")
+    team_menu(chat)
+
+
 # MARK: Conversation
 
 def menu(chat):
-    send(chat, "Что сделать?", [("✅ Выдать надпись", "grant"), ("❌ Забрать надпись", "revoke"), ("🖼 Баннер профиля", "banner"), ("📋 Список", "list"),
-                                ("📦 Добавить шрифт или плагин", "upload"), ("🗂 Каталог", "catalog"), ("🗑 Убрать из каталога", "remove"),
-                                ("🔒 Выйти", "logout")])
+    buttons = [("✅ Выдать надпись", "grant"), ("❌ Забрать надпись", "revoke"), ("🖼 Баннер профиля", "banner"), ("📋 Список", "list"),
+               ("📦 Добавить шрифт или плагин", "upload"), ("🗂 Каталог", "catalog"), ("🗑 Убрать из каталога", "remove")]
+    if chat == OWNER:  # private chats: the chat id is the user's id
+        buttons.append(("👥 Доступ", "team"))
+    send(chat, "Что сделать?", buttons + [("🔒 Выйти", "logout")])
 
 
 # MARK: Catalog uploads
@@ -274,10 +348,44 @@ def load_upload(sender, upload):
 
 def drop_upload(sender, user):
     user.pop("upload", None)
+    for suffix in ("bin", "shot"):
+        try:
+            (UPLOADS / f"{sender}.{suffix}").unlink()
+        except FileNotFoundError:
+            pass
+
+
+def load_screenshot(sender, upload):
+    path = UPLOADS / f"{sender}.shot"
+    if not upload.get("screenshot") or not path.is_file():
+        return None
+    data = path.read_bytes()
+    return data if catalog.hashlib.sha256(data).hexdigest() == upload["screenshot"] else None
+
+
+def ask_screenshot(chat, user):
+    user["step"] = "upload_screenshot"
+    if user["upload"]["kind"] == "font":
+        send(chat, "Пришлите скриншот или превью шрифта (фото или файл PNG/JPG/WEBP до 5 МБ).",
+             [("🖌 Нарисовать превью автоматически", "u:noshot")])
+    else:
+        send(chat, "Пришлите скриншот плагина (фото или файл PNG/JPG/WEBP до 5 МБ).", [("Без скриншота", "u:noshot")])
+
+
+def receive_screenshot(chat, sender, user, file_id, size):
+    if size and size > catalog.SCREENSHOT_MAX_BYTES:
+        send(chat, "Скриншот больше 5 МБ. Пришлите поменьше.")
+        return
+    data = download(file_id)
     try:
-        (UPLOADS / f"{sender}.bin").unlink()
-    except FileNotFoundError:
-        pass
+        catalog.check_screenshot(data or b"")
+    except catalog.Refused as reason:
+        send(chat, f"⛔ {reason} Пришлите другую картинку или нажмите кнопку ниже.")
+        return
+    UPLOADS.mkdir(parents=True, exist_ok=True)
+    (UPLOADS / f"{sender}.shot").write_bytes(data)
+    user["upload"]["screenshot"] = catalog.hashlib.sha256(data).hexdigest()
+    confirm_upload(chat, user)
 
 
 def receive_file(chat, sender, user, document):
@@ -319,6 +427,12 @@ def confirm_upload(chat, user):
     upload = user["upload"]
     lines = [f"{KIND_TITLES.get(upload['kind'], upload['kind'])}: {upload['name']}" + (f" {upload['version']}" if upload.get("version") else ""),
              f"id: {upload['id']}", f"Автор: {upload['author']}", f"Описание: {upload['description'] or '—'}"]
+    if upload.get("screenshot"):
+        lines.append("Скриншот: есть")
+    elif upload["kind"] == "font":
+        lines.append("Превью: нарисую автоматически")
+    else:
+        lines.append("Скриншот: " + ("остаётся прежний" if upload.get("update") else "нет"))
     if upload["kind"] != "font":
         lines.append("Подпись: " + ("официальный (подписан ключом AyuGram)" if upload.get("sign") else "без подписи"))
     user["step"] = "upload_confirm"
@@ -334,7 +448,11 @@ def publish_upload(chat, sender, user):
         send(chat, "Файл потерялся. Начните заново.")
         menu(chat)
         return
+    item.screenshot = load_screenshot(sender, upload)
     existing = folder_files(item.folder)
+    has_preview = any(path.rsplit("/", 1)[-1] in catalog.SCREENSHOT_NAMES for path in existing)
+    if item.screenshot is None and item.is_font and not has_preview:
+        item.screenshot = catalog.font_preview(item.data, item.name)
     signature = None
     signatures = None
     if not item.is_font:
@@ -448,7 +566,7 @@ def handle_message(state, message):
     text = (message.get("text") or "").strip()
     if message["chat"].get("type") != "private":
         return
-    if sender not in TEAM:
+    if sender not in team():
         if sender not in state["refused"]:
             state["refused"].append(sender)
             send(chat, "⛔ Доступ запрещён.")
@@ -520,6 +638,16 @@ def handle_message(state, message):
         user["step"] = "menu"
         menu(chat)
         return
+    if step == "upload_screenshot" and (message.get("photo") or message.get("document")):
+        if message.get("photo"):
+            biggest = message["photo"][-1]
+            receive_screenshot(chat, sender, user, biggest["file_id"], biggest.get("file_size"))
+        else:
+            receive_screenshot(chat, sender, user, message["document"]["file_id"], message["document"].get("file_size"))
+        return
+    if step == "upload_screenshot":
+        send(chat, "Пришлите картинку или нажмите кнопку под прошлым сообщением. /cancel — отмена.")
+        return
     if message.get("document"):
         if step != "upload_file":
             send(chat, "Чтобы добавить файл в каталог, нажмите «📦 Добавить шрифт или плагин».")
@@ -528,7 +656,7 @@ def handle_message(state, message):
         receive_file(chat, sender, user, message["document"])
         return
     if step == "upload_file":
-        send(chat, "Пришлите файл шрифта (.ttf/.otf) или плагина (.ayu.js, .ayu.py, .ayu.lua, .wasm, .iosplug) документом. /cancel — отмена.")
+        send(chat, "Пришлите документом файл шрифта .ttf/.otf или плагина (.ayujs/.ayu.js, .ayupy/.ayu.py, .ayulua/.ayu.lua, .wasm, .iosplug). /cancel — отмена.")
         return
     if step == "upload_author":
         author = text if text.startswith("@") else "@" + text
@@ -544,17 +672,18 @@ def handle_message(state, message):
                 send(chat, "Описание должно быть от 1 до 300 символов, или «-».")
                 return
             user["upload"]["description"] = " ".join(text.split())
-        if user["upload"]["kind"] == "font":
-            confirm_upload(chat, user)
-        elif PLUGIN_KEY.is_file():
+        if user["upload"]["kind"] != "font" and PLUGIN_KEY.is_file():
             user["step"] = "upload_sign"
             send(chat, "Подписать плагин ключом AyuGram? Подписанный считается официальным и может встраиваться в приложение. "
                        "Подписывайте только код, который прочитали.", [("✍️ Подписать", "u:sign"), ("Без подписи", "u:nosign")])
         else:
-            confirm_upload(chat, user)
+            ask_screenshot(chat, user)
         return
     if step == "remove_id":
         remove_item(chat, sender, user, text)
+        return
+    if step in ("team_add", "team_remove"):
+        change_team(state, chat, sender, user, text, step == "team_add")
         return
     if text.split(maxsplit=1)[:1] == ["/banner"]:
         parts = text.split(maxsplit=2)
@@ -633,7 +762,7 @@ def handle_callback(state, query):
     sender = query.get("from", {}).get("id")
     chat = query.get("message", {}).get("chat", {}).get("id")
     call("answerCallbackQuery", callback_query_id=query["id"])
-    if sender not in TEAM or chat is None or query.get("message", {}).get("chat", {}).get("type") != "private":
+    if sender not in team() or chat is None or query.get("message", {}).get("chat", {}).get("type") != "private":
         return
     user = state["users"].setdefault(str(sender), {"step": "new"})
     if "hash" not in user or user.get("session", 0) < time.time() or user.get("locked_until", 0) > time.time():
@@ -660,7 +789,8 @@ def handle_callback(state, query):
     elif data == "upload":
         drop_upload(sender, user)
         user["step"] = "upload_file"
-        send(chat, "Пришлите файл документом: шрифт .ttf/.otf или плагин .ayu.js, .ayu.py, .ayu.lua, .wasm, .iosplug. /cancel — отмена.")
+        send(chat, "Пришлите файл документом: шрифт .ttf/.otf или плагин .ayujs/.ayu.js, .ayupy/.ayu.py, .ayulua/.ayu.lua, "
+                   ".wasm, .iosplug. Потом бот спросит автора, описание и скриншот. /cancel — отмена.")
     elif data == "catalog":
         show_catalog(chat)
         menu(chat)
@@ -669,6 +799,8 @@ def handle_callback(state, query):
         send(chat, "Что убрать? Напишите «шрифт id» или «плагин id» (id есть в «🗂 Каталог»). /cancel — отмена.")
     elif data in ("u:sign", "u:nosign") and user.get("step") == "upload_sign" and user.get("upload"):
         user["upload"]["sign"] = data == "u:sign"
+        ask_screenshot(chat, user)
+    elif data == "u:noshot" and user.get("step") == "upload_screenshot" and user.get("upload"):
         confirm_upload(chat, user)
     elif data == "u:publish" and user.get("step") == "upload_confirm":
         publish_upload(chat, sender, user)
@@ -683,6 +815,21 @@ def handle_callback(state, query):
         user.pop("removal", None)
         user["step"] = "menu"
         menu(chat)
+    elif data in ("team", "t:add", "t:remove", "t:back"):
+        if sender != OWNER:
+            send(chat, "⛔ Доступом управляет только владелец.")
+            menu(chat)
+        elif data == "team":
+            team_menu(chat)
+        elif data == "t:add":
+            user["step"] = "team_add"
+            send(chat, "Отправьте Telegram ID, которому дать доступ к боту. /cancel — отмена.")
+        elif data == "t:remove":
+            user["step"] = "team_remove"
+            send(chat, "Отправьте Telegram ID, у которого забрать доступ. /cancel — отмена.")
+        else:
+            user["step"] = "menu"
+            menu(chat)
     elif data == "logout":
         user["session"] = 0
         user["step"] = "password"

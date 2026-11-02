@@ -21,6 +21,7 @@ class BannerTests(unittest.TestCase):
         self.send = self.start_patch("send")
         self.start_patch("call")
         self.start_patch("log")
+        self.start_patch("team", return_value=set(bot.TEAM))  # never the machine's real team.json
         self.start_patch("load_registry", side_effect=lambda: copy.deepcopy(self.registry))
         self.publish = self.start_patch("publish")
 

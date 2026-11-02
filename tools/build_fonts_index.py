@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Write fonts/index.json, the font catalog AyuGram downloads.
 
-Each font lives in fonts/<id>/ with one font.ttf or font.otf and a font.json:
+Each font lives in fonts/<id>/ with one font.ttf or font.otf, a font.json and optionally a
+screenshot.png / .jpg / .webp preview:
 
     {"name": "My Font", "author": "someone", "description": "Optional, one line"}
 
@@ -45,6 +46,7 @@ def main():
         if not meta.get("name"):
             errors.append(f"{folder.name}: font.json needs a name")
             continue
+        preview = next((name for name in ("screenshot.png", "screenshot.jpg", "screenshot.webp") if (folder / name).is_file()), None)
         fonts.append({
             "id": folder.name,
             "name": str(meta["name"])[:64],
@@ -53,6 +55,7 @@ def main():
             "url": RAW + f"fonts/{folder.name}/{font.name}",
             "sha256": hashlib.sha256(data).hexdigest(),
             "size": len(data),
+            **({"preview": RAW + f"fonts/{folder.name}/{preview}"} if preview else {}),
         })
     if errors:
         print("\n".join(errors), file=sys.stderr)
