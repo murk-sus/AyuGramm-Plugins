@@ -9,7 +9,8 @@
       "description": "Рисованный от руки. Кириллица, латиница и цифры.",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/dream-font/font.ttf",
       "sha256": "b542c327288e7e4643287a0bbe6434640dab2c5a07bb290c6d45a86034ad9588",
-      "size": 39032
+      "size": 39032,
+      "preview": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/dream-font/screenshot.png"
     },
     {
       "id": "ink-italic",
@@ -18,7 +19,8 @@
       "description": "Курсив, как написанный чернилами. Кириллица, латиница и цифры.",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/ink-italic/font.ttf",
       "sha256": "e419ed88962e179eae7cdc5d18b8666826fa05110cda62ecbff9160cee2bb322",
-      "size": 45176
+      "size": 45176,
+      "preview": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/ink-italic/screenshot.png"
     },
     {
       "id": "narrow-x",
@@ -27,7 +29,8 @@
       "description": "Узкий высокий шрифт. Кириллица, латиница и цифры.",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/narrow-x/font.ttf",
       "sha256": "2e25d7beaec0dbb201ccad291398b5b545416e835c039ae944a9a60d53e8e574",
-      "size": 28536
+      "size": 28536,
+      "preview": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/narrow-x/screenshot.png"
     },
     {
       "id": "slice-cut",
@@ -36,7 +39,8 @@
       "description": "Рубленые буквы с косым срезом. Кириллица, латиница и цифры.",
       "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/slice-cut/font.ttf",
       "sha256": "dce48c6c715af7b8cac428f7a3e5532baa04b3ee9e29c0a5f6d386d833042301",
-      "size": 72664
+      "size": 72664,
+      "preview": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/fonts/slice-cut/screenshot.png"
     }
   ]
 }

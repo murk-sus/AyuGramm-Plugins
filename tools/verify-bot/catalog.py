@@ -24,6 +24,17 @@ ID = re.compile(r"^[a-z0-9_-]{1,64}$")
 NICK = re.compile(r"^@[A-Za-z0-9_]{4,32}$")
 FONT_MAX_BYTES = 15 * 1024 * 1024
 PLUGIN_FILES = ("plugin.ayu.js", "plugin.ayu.py", "plugin.ayu.lua", "plugin.wasm", "plugin.iosplug")
+# Every spelling AyuGram accepts: ".ayu.js", ".ayujs" and plain ".js" are all JavaScript, and so on.
+EXTENSIONS = {
+    "js": ("ayu.js", "ayujs", "js"),
+    "python": ("ayu.py", "ayupy", "py"),
+    "lua": ("ayu.lua", "ayulua", "lua"),
+    "wasm": ("ayu.wasm", "ayuwasm", "wasm"),
+    "iosplug": ("iosplug",),
+}
+TARGETS = {"js": "plugin.ayu.js", "python": "plugin.ayu.py", "lua": "plugin.ayu.lua", "wasm": "plugin.wasm", "iosplug": "plugin.iosplug"}
+SCREENSHOT_MAX_BYTES = 5 * 1024 * 1024
+SCREENSHOT_NAMES = ("screenshot.png", "screenshot.jpg", "screenshot.webp")
 
 
 class Refused(Exception):
@@ -41,6 +52,7 @@ class Item:
     data: bytes = b""
     injects: bool = False
     extra: dict = field(default_factory=dict)
+    screenshot: bytes = None  # png, jpg or webp shown in the folder README and the catalog
 
     @property
     def is_font(self):
@@ -53,6 +65,59 @@ class Item:
     @property
     def sha256(self):
         return hashlib.sha256(self.data).hexdigest()
+
+
+def plugin_kind(filename):
+    """The plugin language for a file name, whatever spelling of the extension it uses."""
+    lower = filename.lower()
+    for kind, suffixes in EXTENSIONS.items():
+        if any(lower.endswith("." + suffix) for suffix in suffixes):
+            return kind
+    return None
+
+
+def image_extension(data):
+    """png / jpg / webp for a picture, None for anything else."""
+    if data[:8] == b"\x89PNG\r\n\x1a\n":
+        return "png"
+    if data[:3] == b"\xff\xd8\xff":
+        return "jpg"
+    if data[:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "webp"
+    return None
+
+
+def check_screenshot(data):
+    if len(data) > SCREENSHOT_MAX_BYTES:
+        raise Refused("Скриншот больше 5 МБ.")
+    if image_extension(data) is None:
+        raise Refused("Скриншот должен быть картинкой PNG, JPG или WEBP.")
+    return data
+
+
+def font_preview(data, name):
+    """A PNG sample of the font, or None when Pillow is not installed."""
+    try:
+        from io import BytesIO
+        from PIL import Image, ImageDraw, ImageFont
+    except ImportError:
+        return None
+    try:
+        lines = [(name, 64), ("Съешь же ещё этих мягких", 44), ("французских булок, да выпей чаю.", 44),
+                 ("The quick brown fox jumps", 44), ("0123456789 !?.,", 44)]
+        image = Image.new("RGB", (1200, 520), (18, 18, 24))
+        draw = ImageDraw.Draw(image)
+        y = 40
+        for text, size in lines:
+            font = ImageFont.truetype(BytesIO(data), size)
+            draw.text((48, y), text, font=font, fill=(255, 255, 255) if size > 50 else (200, 200, 215))
+            y += int(size * 1.6)
+        image = image.crop((0, 0, image.width, min(image.height, y + 16)))
+        out = BytesIO()
+        image.save(out, "PNG", optimize=True)
+        return out.getvalue()
+    except Exception:  # an odd font must not stop the upload; it just gets no preview
+        return None
 
 
 def slug(text):
@@ -97,18 +162,11 @@ def inspect(filename, data):
         ext = ".otf" if lower.endswith(".otf") else ".ttf"
         return Item(kind="font", id=slug(family), name=family[:64], filename="font" + ext, data=data,
                     extra={"style": names.get(2, ""), "postscript": names.get(6, "")})
-    if lower.endswith(".iosplug"):
-        kind, target = "iosplug", "plugin.iosplug"
-    elif lower.endswith(".wasm"):
-        kind, target = "wasm", "plugin.wasm"
-    elif lower.endswith(".py"):
-        kind, target = "python", "plugin.ayu.py"
-    elif lower.endswith(".lua"):
-        kind, target = "lua", "plugin.ayu.lua"
-    elif lower.endswith(".js"):
-        kind, target = "js", "plugin.ayu.js"
-    else:
-        raise Refused("Поддерживаются шрифты .ttf/.otf и плагины .ayu.js, .ayu.py, .ayu.lua, .wasm и .iosplug.")
+    kind = plugin_kind(filename)
+    if kind is None:
+        raise Refused("Поддерживаются шрифты .ttf/.otf и плагины .ayujs/.ayu.js/.js, .ayupy/.ayu.py/.py, "
+                      ".ayulua/.ayu.lua/.lua, .wasm и .iosplug.")
+    target = TARGETS[kind]
     with tempfile.TemporaryDirectory() as tmp:
         # build_index wants the file in a folder named after the plugin id; read the id first.
         fields = plugin_fields(kind, data)
@@ -179,11 +237,17 @@ def changes(item, author, description, existing_files, signatures=None, signatur
     """
     result = {}
     keep = {f"{item.folder}/{item.filename}", f"{item.folder}/meta.json", f"{item.folder}/font.json"}
+    screenshot_name = f"screenshot.{image_extension(item.screenshot)}" if item.screenshot else None
     for path in existing_files:
         name = path.rsplit("/", 1)[-1]
-        if path not in keep and (name in PLUGIN_FILES or name in ("font.ttf", "font.otf")):
+        stale_file = name in PLUGIN_FILES or name in ("font.ttf", "font.otf")
+        # A new screenshot replaces the old one; without a new one the old one stays.
+        stale_screenshot = screenshot_name is not None and name in SCREENSHOT_NAMES and name != screenshot_name
+        if path not in keep and (stale_file or stale_screenshot):
             result[path] = None
     result[f"{item.folder}/{item.filename}"] = item.data
+    if screenshot_name:
+        result[f"{item.folder}/{screenshot_name}"] = item.screenshot
     if item.is_font:
         meta = {"name": item.name, "author": author, "description": description}
         result[f"{item.folder}/font.json"] = (json.dumps(meta, ensure_ascii=False, indent=2) + "\n").encode()

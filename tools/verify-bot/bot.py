@@ -274,10 +274,44 @@ def load_upload(sender, upload):
 
 def drop_upload(sender, user):
     user.pop("upload", None)
+    for suffix in ("bin", "shot"):
+        try:
+            (UPLOADS / f"{sender}.{suffix}").unlink()
+        except FileNotFoundError:
+            pass
+
+
+def load_screenshot(sender, upload):
+    path = UPLOADS / f"{sender}.shot"
+    if not upload.get("screenshot") or not path.is_file():
+        return None
+    data = path.read_bytes()
+    return data if catalog.hashlib.sha256(data).hexdigest() == upload["screenshot"] else None
+
+
+def ask_screenshot(chat, user):
+    user["step"] = "upload_screenshot"
+    if user["upload"]["kind"] == "font":
+        send(chat, "Пришлите скриншот или превью шрифта (фото или файл PNG/JPG/WEBP до 5 МБ).",
+             [("🖌 Нарисовать превью автоматически", "u:noshot")])
+    else:
+        send(chat, "Пришлите скриншот плагина (фото или файл PNG/JPG/WEBP до 5 МБ).", [("Без скриншота", "u:noshot")])
+
+
+def receive_screenshot(chat, sender, user, file_id, size):
+    if size and size > catalog.SCREENSHOT_MAX_BYTES:
+        send(chat, "Скриншот больше 5 МБ. Пришлите поменьше.")
+        return
+    data = download(file_id)
     try:
-        (UPLOADS / f"{sender}.bin").unlink()
-    except FileNotFoundError:
-        pass
+        catalog.check_screenshot(data or b"")
+    except catalog.Refused as reason:
+        send(chat, f"⛔ {reason} Пришлите другую картинку или нажмите кнопку ниже.")
+        return
+    UPLOADS.mkdir(parents=True, exist_ok=True)
+    (UPLOADS / f"{sender}.shot").write_bytes(data)
+    user["upload"]["screenshot"] = catalog.hashlib.sha256(data).hexdigest()
+    confirm_upload(chat, user)
 
 
 def receive_file(chat, sender, user, document):
@@ -319,6 +353,12 @@ def confirm_upload(chat, user):
     upload = user["upload"]
     lines = [f"{KIND_TITLES.get(upload['kind'], upload['kind'])}: {upload['name']}" + (f" {upload['version']}" if upload.get("version") else ""),
              f"id: {upload['id']}", f"Автор: {upload['author']}", f"Описание: {upload['description'] or '—'}"]
+    if upload.get("screenshot"):
+        lines.append("Скриншот: есть")
+    elif upload["kind"] == "font":
+        lines.append("Превью: нарисую автоматически")
+    else:
+        lines.append("Скриншот: " + ("остаётся прежний" if upload.get("update") else "нет"))
     if upload["kind"] != "font":
         lines.append("Подпись: " + ("официальный (подписан ключом AyuGram)" if upload.get("sign") else "без подписи"))
     user["step"] = "upload_confirm"
@@ -334,7 +374,11 @@ def publish_upload(chat, sender, user):
         send(chat, "Файл потерялся. Начните заново.")
         menu(chat)
         return
+    item.screenshot = load_screenshot(sender, upload)
     existing = folder_files(item.folder)
+    has_preview = any(path.rsplit("/", 1)[-1] in catalog.SCREENSHOT_NAMES for path in existing)
+    if item.screenshot is None and item.is_font and not has_preview:
+        item.screenshot = catalog.font_preview(item.data, item.name)
     signature = None
     signatures = None
     if not item.is_font:
@@ -520,6 +564,16 @@ def handle_message(state, message):
         user["step"] = "menu"
         menu(chat)
         return
+    if step == "upload_screenshot" and (message.get("photo") or message.get("document")):
+        if message.get("photo"):
+            biggest = message["photo"][-1]
+            receive_screenshot(chat, sender, user, biggest["file_id"], biggest.get("file_size"))
+        else:
+            receive_screenshot(chat, sender, user, message["document"]["file_id"], message["document"].get("file_size"))
+        return
+    if step == "upload_screenshot":
+        send(chat, "Пришлите картинку или нажмите кнопку под прошлым сообщением. /cancel — отмена.")
+        return
     if message.get("document"):
         if step != "upload_file":
             send(chat, "Чтобы добавить файл в каталог, нажмите «📦 Добавить шрифт или плагин».")
@@ -528,7 +582,7 @@ def handle_message(state, message):
         receive_file(chat, sender, user, message["document"])
         return
     if step == "upload_file":
-        send(chat, "Пришлите файл шрифта (.ttf/.otf) или плагина (.ayu.js, .ayu.py, .ayu.lua, .wasm, .iosplug) документом. /cancel — отмена.")
+        send(chat, "Пришлите документом файл шрифта .ttf/.otf или плагина (.ayujs/.ayu.js, .ayupy/.ayu.py, .ayulua/.ayu.lua, .wasm, .iosplug). /cancel — отмена.")
         return
     if step == "upload_author":
         author = text if text.startswith("@") else "@" + text
@@ -544,14 +598,12 @@ def handle_message(state, message):
                 send(chat, "Описание должно быть от 1 до 300 символов, или «-».")
                 return
             user["upload"]["description"] = " ".join(text.split())
-        if user["upload"]["kind"] == "font":
-            confirm_upload(chat, user)
-        elif PLUGIN_KEY.is_file():
+        if user["upload"]["kind"] != "font" and PLUGIN_KEY.is_file():
             user["step"] = "upload_sign"
             send(chat, "Подписать плагин ключом AyuGram? Подписанный считается официальным и может встраиваться в приложение. "
                        "Подписывайте только код, который прочитали.", [("✍️ Подписать", "u:sign"), ("Без подписи", "u:nosign")])
         else:
-            confirm_upload(chat, user)
+            ask_screenshot(chat, user)
         return
     if step == "remove_id":
         remove_item(chat, sender, user, text)
@@ -660,7 +712,8 @@ def handle_callback(state, query):
     elif data == "upload":
         drop_upload(sender, user)
         user["step"] = "upload_file"
-        send(chat, "Пришлите файл документом: шрифт .ttf/.otf или плагин .ayu.js, .ayu.py, .ayu.lua, .wasm, .iosplug. /cancel — отмена.")
+        send(chat, "Пришлите файл документом: шрифт .ttf/.otf или плагин .ayujs/.ayu.js, .ayupy/.ayu.py, .ayulua/.ayu.lua, "
+                   ".wasm, .iosplug. Потом бот спросит автора, описание и скриншот. /cancel — отмена.")
     elif data == "catalog":
         show_catalog(chat)
         menu(chat)
@@ -669,6 +722,8 @@ def handle_callback(state, query):
         send(chat, "Что убрать? Напишите «шрифт id» или «плагин id» (id есть в «🗂 Каталог»). /cancel — отмена.")
     elif data in ("u:sign", "u:nosign") and user.get("step") == "upload_sign" and user.get("upload"):
         user["upload"]["sign"] = data == "u:sign"
+        ask_screenshot(chat, user)
+    elif data == "u:noshot" and user.get("step") == "upload_screenshot" and user.get("upload"):
         confirm_upload(chat, user)
     elif data == "u:publish" and user.get("step") == "upload_confirm":
         publish_upload(chat, sender, user)

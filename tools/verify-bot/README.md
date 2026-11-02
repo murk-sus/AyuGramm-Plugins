@@ -8,13 +8,17 @@ Secrets remain under `~/.config/ayugram-bot` (and the plugin key under
 ## Fonts and plugins
 
 **📦 Добавить шрифт или плагин** → send the file as a document → the author's Telegram @nick →
-a description (`-` keeps the plugin's own) → for plugins, sign or not → **Опубликовать**.
+a description (`-` keeps the plugin's own) → for plugins, sign or not → a screenshot (photo or
+PNG/JPG/WEBP up to 5 MB; fonts without one get a drawn preview) → **Опубликовать**.
 
 - Fonts: `.ttf` / `.otf` up to 15 MB with a PostScript name; stored as `fonts/<id>/font.ttf`
   and `font.json`.
-- Plugins: `.ayu.js`, `.ayu.py`, `.ayu.lua`, `.wasm` and `.iosplug`, checked with the rules of
-  `tools/build_index.py`; stored as `plugins/<id>/plugin.*` and `meta.json` (author,
-  description, official).
+- Plugins: JavaScript (`.ayujs`, `.ayu.js`, `.js`), Python (`.ayupy`, `.ayu.py`, `.py`),
+  Lua (`.ayulua`, `.ayu.lua`, `.lua`), Rust (`.wasm`, `.ayuwasm`) and `.iosplug`, checked with
+  the rules of `tools/build_index.py`; stored as `plugins/<id>/plugin.*` and `meta.json`
+  (author, description, official).
+- Every item has its own folder: the file, `screenshot.png|jpg|webp` and a `README.md` the
+  Catalog workflow writes from the catalog (author, version, description, screenshot, SHA-256).
 - Signing uses `$AYU_SIGNING_KEY` or `~/.config/ayugram-plugins/signing-key.pem` and makes the
   plugin official, so it may inject into the app. Sign only code you have read.
 - Sending an item that already exists replaces it. **🗑 Убрать из каталога** deletes one

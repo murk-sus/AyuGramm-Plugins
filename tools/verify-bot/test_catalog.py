@@ -20,6 +20,7 @@ bot = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(bot)
 
 FONT = (REPO / "fonts/dream-font/font.ttf").read_bytes()
+PNG = (REPO / "fonts/dream-font/screenshot.png").read_bytes()
 JS = b"""// ==AyuPlugin==
 // @id my-plugin
 // @name My plugin
@@ -75,6 +76,25 @@ class InspectTests(unittest.TestCase):
         self.assertEqual((item.kind, item.id, item.version, item.filename), ("js", "my-plugin", "1.2", "plugin.ayu.js"))
         self.assertEqual(item.description, "Trims outgoing text.")
 
+    def test_every_spelling_of_the_extension(self):
+        cases = {"x.ayujs": "js", "x.ayu.js": "js", "x.js": "js", "x.AYUJS": "js",
+                 "x.ayupy": "python", "x.ayu.py": "python", "x.py": "python",
+                 "x.ayulua": "lua", "x.ayu.lua": "lua", "x.lua": "lua",
+                 "x.wasm": "wasm", "x.ayuwasm": "wasm", "x.iosplug": "iosplug"}
+        for name, kind in cases.items():
+            self.assertEqual(catalog.plugin_kind(name), kind, name)
+        self.assertIsNone(catalog.plugin_kind("x.zip"))
+        self.assertEqual(catalog.inspect("my.ayujs", JS).filename, "plugin.ayu.js")
+        self.assertEqual(catalog.inspect("thing.ayulua", LUA).kind, "lua")
+
+    def test_screenshots(self):
+        self.assertEqual(catalog.image_extension(PNG), "png")
+        self.assertEqual(catalog.image_extension(b"\xff\xd8\xff\xe0rest"), "jpg")
+        with self.assertRaises(catalog.Refused):
+            catalog.check_screenshot(b"<svg/>")
+        preview = catalog.font_preview(FONT, "DreamFont")
+        self.assertEqual(catalog.image_extension(preview), "png")
+
     def test_lua_plugin(self):
         item = catalog.inspect("thing.ayu.lua", LUA)
         self.assertEqual((item.kind, item.id, item.filename), ("lua", "lua-thing", "plugin.ayu.lua"))
@@ -113,6 +133,16 @@ class ChangesTests(unittest.TestCase):
         self.assertEqual(signatures["my-plugin"], {"sha256": item.sha256, "signature": "SIG"})
         self.assertIn("other", signatures)
 
+    def test_new_screenshot_replaces_the_old_one(self):
+        item = catalog.inspect("my.ayu.js", JS)
+        item.screenshot = PNG
+        files = catalog.changes(item, "@author_x", "", ["plugins/my-plugin/screenshot.jpg", "plugins/my-plugin/README.md"])
+        self.assertEqual(files["plugins/my-plugin/screenshot.png"], PNG)
+        self.assertIsNone(files["plugins/my-plugin/screenshot.jpg"])
+        self.assertNotIn("plugins/my-plugin/README.md", files)  # written by the Catalog workflow
+        item.screenshot = None
+        self.assertNotIn("plugins/my-plugin/screenshot.jpg", catalog.changes(item, "@author_x", "", ["plugins/my-plugin/screenshot.jpg"]))
+
     def test_unsigned_update_drops_old_signature(self):
         item = catalog.inspect("my.ayu.js", JS)
         files = catalog.changes(item, "@author_x", "", [], {"my-plugin": {"sha256": "old", "signature": "old"}}, None)
@@ -133,6 +163,7 @@ class BuildTests(unittest.TestCase):
             (root / "plugins/lua-thing").mkdir(parents=True)
             (root / "plugins/lua-thing/plugin.ayu.lua").write_bytes(LUA)
             (root / "plugins/lua-thing/meta.json").write_text(json.dumps({"author": "@lwwlt", "description": "Better text"}))
+            (root / "plugins/lua-thing/screenshot.png").write_bytes(PNG)
             (root / "plugins/my-plugin").mkdir(parents=True)
             (root / "plugins/my-plugin/plugin.ayu.js").write_bytes(JS)
             with patch.object(build_index, "ROOT", root):
@@ -140,6 +171,8 @@ class BuildTests(unittest.TestCase):
             entries = {e["id"]: e for e in json.loads((root / "index.json").read_text())["plugins"]}
             self.assertEqual((entries["lua-thing"]["kind"], entries["lua-thing"]["author"], entries["lua-thing"]["description"]), ("lua", "@lwwlt", "Better text"))
             self.assertEqual(entries["my-plugin"]["author"], build_index.CATALOG_AUTHOR)  # no meta.json: the team
+            self.assertEqual(entries["lua-thing"]["screenshots"], [build_index.RAW + "plugins/lua-thing/screenshot.png"])
+            self.assertNotIn("screenshots", entries["my-plugin"])
 
     def test_readme_section(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -147,15 +180,22 @@ class BuildTests(unittest.TestCase):
             (root / "fonts").mkdir()
             (root / "plugins/lua-thing").mkdir(parents=True)
             (root / "plugins/lua-thing/meta.json").write_text("{}")
-            (root / "fonts/index.json").write_text(json.dumps({"fonts": [{"id": "a", "name": "A | B", "author": "@lwwlt", "description": "x", "url": "https://r/main/fonts/a/font.ttf"}]}))
-            (root / "index.json").write_text(json.dumps({"plugins": [{"id": "lua-thing", "name": "Lua thing", "author": "@lwwlt", "kind": "lua", "version": "0.1", "description": "d", "url": "https://r/main/plugins/lua-thing/plugin.ayu.lua"}]}))
+            (root / "plugins/lua-thing/screenshot.png").write_bytes(PNG)
+            (root / "fonts/a").mkdir()
+            (root / "fonts/index.json").write_text(json.dumps({"fonts": [{"id": "a", "name": "A | B", "author": "@lwwlt", "description": "x", "url": "https://r/main/fonts/a/font.ttf", "sha256": "f" * 64}]}))
+            (root / "index.json").write_text(json.dumps({"plugins": [{"id": "lua-thing", "name": "Lua thing", "author": "@lwwlt", "kind": "lua", "version": "0.1", "description": "d", "url": "https://r/main/plugins/lua-thing/plugin.ayu.lua", "sha256": "e" * 64}]}))
             (root / "README.md").write_text("# Title\n\nIntro\n\n## Installing\n\nText\n")
             with patch.object(build_readme, "ROOT", root):
                 build_readme.main()
                 first = (root / "README.md").read_text()
                 build_readme.main()
             self.assertEqual(first, (root / "README.md").read_text())
-            self.assertIn("| [A \\| B](fonts/a/font.ttf) | [@lwwlt](https://t.me/lwwlt) | x |", first)
+            self.assertIn("| [A \\| B](fonts/a) | [@lwwlt](https://t.me/lwwlt) | x |", first)
+            folder = (root / "plugins/lua-thing/README.md").read_text()
+            self.assertIn("[@lwwlt](https://t.me/lwwlt)", folder)
+            self.assertIn("![Lua thing](screenshot.png)", folder)
+            self.assertIn("e" * 64, folder)
+            self.assertTrue((root / "fonts/a/README.md").is_file())
             self.assertIn("## Plugins by other authors", first)
             self.assertLess(first.index("catalog:end"), first.index("## Installing"))
 
@@ -184,10 +224,12 @@ class BotUploadTests(unittest.TestCase):
         self.addCleanup(patcher.stop)
         return patcher.start()
 
-    def message(self, text="", document=None, sender=None):
+    def message(self, text="", document=None, sender=None, photo=None):
         message = {"chat": {"id": 5, "type": "private"}, "from": {"id": sender or self.sender}, "text": text, "message_id": 1}
         if document:
             message["document"] = document
+        if photo:
+            message["photo"] = photo
         bot.handle_message(self.state, message)
 
     def callback(self, data):
@@ -201,10 +243,13 @@ class BotUploadTests(unittest.TestCase):
         self.message("lwwlt")
         self.assertEqual(self.user["upload"]["author"], "@lwwlt")
         self.message("Рисованный шрифт")
+        self.assertEqual(self.user["step"], "upload_screenshot")
+        self.callback("u:noshot")
         self.assertEqual(self.user["step"], "upload_confirm")
         self.callback("u:publish")
         files, message = self.commit.call_args.args
         self.assertEqual(files["fonts/dreamfont/font.ttf"], FONT)
+        self.assertEqual(catalog.image_extension(files["fonts/dreamfont/screenshot.png"]), "png")  # drawn automatically
         self.assertEqual(json.loads(files["fonts/dreamfont/font.json"])["author"], "@lwwlt")
         self.assertIn("by @lwwlt", message)
         self.report.assert_called_once()
@@ -218,10 +263,38 @@ class BotUploadTests(unittest.TestCase):
         self.message(document={"file_id": "f", "file_name": "my.ayu.js", "file_size": len(JS)})
         self.message("@some_author")
         self.message("-")
+        self.callback("u:noshot")
         self.callback("u:publish")
         files = self.commit.call_args.args[0]
         meta = json.loads(files["plugins/my-plugin/meta.json"])
         self.assertEqual((meta["description"], meta["official"]), ("Trims outgoing text.", False))
+        self.assertFalse(any(path.endswith(("screenshot.png", "screenshot.jpg")) for path in files))
+
+    def test_ayujs_plugin_with_photo_screenshot(self):
+        self.callback("upload")
+        self.download.return_value = JS
+        self.message(document={"file_id": "f", "file_name": "my.ayujs", "file_size": len(JS)})
+        self.assertEqual(self.user["step"], "upload_author")
+        self.message("@some_author")
+        self.message("Описание")
+        self.download.return_value = PNG
+        self.message(photo=[{"file_id": "small", "file_size": 10}, {"file_id": "big", "file_size": len(PNG)}])
+        self.assertEqual(self.download.call_args.args[0], "big")
+        self.assertEqual(self.user["step"], "upload_confirm")
+        self.callback("u:publish")
+        files = self.commit.call_args.args[0]
+        self.assertEqual(files["plugins/my-plugin/plugin.ayu.js"], JS)
+        self.assertEqual(files["plugins/my-plugin/screenshot.png"], PNG)
+
+    def test_screenshot_must_be_a_picture(self):
+        self.callback("upload")
+        self.download.return_value = JS
+        self.message(document={"file_id": "f", "file_name": "my.ayujs", "file_size": len(JS)})
+        self.message("@some_author")
+        self.message("-")
+        self.download.return_value = b"not an image"
+        self.message(document={"file_id": "g", "file_name": "shot.txt", "file_size": 12})
+        self.assertEqual(self.user["step"], "upload_screenshot")
 
     def test_refused_file_keeps_waiting(self):
         self.callback("upload")

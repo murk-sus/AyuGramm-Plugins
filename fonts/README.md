@@ -20,7 +20,8 @@ By hand:
    ```json
    {"name": "My Font", "author": "@telegram_nick", "description": "One line about it"}
    ```
-4. Run `python3 tools/build_fonts_index.py` and commit `fonts/index.json`, or open a pull
+4. Optionally add `screenshot.png` (or `.jpg`, `.webp`) as a preview.
+5. Run `python3 tools/build_fonts_index.py` and commit `fonts/index.json`, or open a pull
    request — the GitHub Action rebuilds the index after the merge.
 
 Only add fonts whose author allows redistributing them (for example under the SIL Open Font License).
