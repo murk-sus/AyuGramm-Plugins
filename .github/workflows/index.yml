@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["plugins/**", "fonts/**", "tools/**", ".github/workflows/index.yml"]
   pull_request:
-    paths: ["plugins/**", "tools/**"]
+    paths: ["plugins/**", "fonts/**", "tools/**"]
 
 permissions:
   contents: write
@@ -23,13 +23,15 @@ jobs:
         run: python3 tools/build_index.py
       - name: Build fonts/index.json
         run: python3 tools/build_fonts_index.py
+      - name: Update README.md
+        run: python3 tools/build_readme.py
       - name: Commit index.json
         if: github.event_name == 'push'
         run: |
-          if ! git diff --quiet -- index.json fonts/index.json; then
+          if ! git diff --quiet -- index.json fonts/index.json README.md; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add index.json fonts/index.json
+            git add index.json fonts/index.json README.md
             git commit -m "Rebuild catalog indexes"
             git push
           fi

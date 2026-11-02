@@ -4,6 +4,7 @@
 Each plugin lives in plugins/<id>/ as either
 - plugin.ayu.js: a JavaScript code plugin with an `// ==AyuPlugin==` header (kind "js"), or
 - plugin.ayu.py: a Python plugin with a `# ==AyuPlugin==` header (kind "python"),
+- plugin.ayu.lua: a Lua plugin with a `-- ==AyuPlugin==` header (kind "lua"),
 - plugin.wasm: a Rust/WebAssembly plugin with an `ayu.manifest` custom section (kind "wasm"),
 - plugin.iosplug: a native plugin card, `ayu-iosplug-1` or `ayu-iosplug-2` (kind "iosplug").
 `@inject true` (or `"inject": true`) marks plugins that change the app itself (player, lyrics);
@@ -140,10 +141,12 @@ def main():
         else:
             if (folder / "plugin.ayu.py").is_file():
                 path, kind, filename, comment = folder / "plugin.ayu.py", "python", "plugin.ayu.py", "#"
+            elif (folder / "plugin.ayu.lua").is_file():
+                path, kind, filename, comment = folder / "plugin.ayu.lua", "lua", "plugin.ayu.lua", "--"
             else:
                 path, kind, filename, comment = folder / "plugin.ayu.js", "js", "plugin.ayu.js", "//"
             if not path.is_file():
-                errors.append(f"{folder.name}: missing plugin.ayu.js, plugin.ayu.py, plugin.wasm or plugin.iosplug")
+                errors.append(f"{folder.name}: missing plugin.ayu.js, plugin.ayu.py, plugin.ayu.lua, plugin.wasm or plugin.iosplug")
                 continue
             data = path.read_bytes()
             if len(data) > MAX_BYTES:
@@ -182,10 +185,26 @@ def main():
     # Official plugins: the signature from signatures.json, only while the file is unchanged.
     for entry in entries:
         entry["author"] = CATALOG_AUTHOR
+        # plugins/<id>/meta.json, written by the team bot: who made the plugin and how to
+        # describe it in the catalog. Without it the plugin is credited to the team.
+        meta_path = ROOT / "plugins" / entry["id"] / "meta.json"
+        if meta_path.is_file():
+            try:
+                meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                errors.append(f"{entry['id']}: meta.json is not JSON")
+                continue
+            if isinstance(meta.get("author"), str) and meta["author"].strip():
+                entry["author"] = meta["author"].strip()[:128]
+            if isinstance(meta.get("description"), str) and meta["description"].strip():
+                entry["description"] = meta["description"].strip()[:1024]
         signed = known.get(entry["id"])
         if signed and signed.get("sha256") == entry["sha256"]:
             entry["signature"] = signed["signature"]
-    index = {"format": "ayugram-plugin-catalog", "version": 1, "plugins": entries}
+    if errors:
+        print("\n".join(errors), file=sys.stderr)
+        return 1
+    index ={"format": "ayugram-plugin-catalog", "version": 1, "plugins": entries}
     (ROOT / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"index.json: {len(entries)} plugins")
     return 0
