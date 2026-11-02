@@ -188,9 +188,35 @@ def inspect(filename, data):
             limit = build_index.MAX_WASM_BYTES if kind == "wasm" else build_index.MAX_BYTES
             if len(data) > limit:
                 raise Refused(f"Плагин больше {limit // 1024} КБ.")
+            if kind == "js":
+                check_js_loads(data)
     return Item(kind=kind, id=pid, name=fields.get("name", pid)[:64], version=fields.get("version", "")[:32],
                 description=fields.get("description", fields.get("summary", ""))[:1024], filename=target, data=data,
                 injects=str(fields.get("inject", "")).lower() in ("true", "yes", "1"))
+
+
+def check_js_loads(data):
+    """Runs tools/test_plugins.js on a JavaScript plugin, as the Catalog workflow will.
+
+    A plugin that throws while loading would fail the workflow and stop the whole catalog from
+    rebuilding, so the bot refuses it up front. Skipped when node or the script is missing.
+    """
+    import shutil
+    node = shutil.which("node")
+    here = Path(__file__).resolve().parent
+    script = next((path for path in (here.parent / "test_plugins.js", here / "test_plugins.js") if path.is_file()), None)
+    if node is None or script is None:
+        return
+    with tempfile.TemporaryDirectory() as tmp:
+        path = Path(tmp) / "plugin.ayu.js"
+        path.write_bytes(data)
+        try:
+            result = subprocess.run([node, str(script), str(path)], capture_output=True, text=True, timeout=20)
+        except subprocess.TimeoutExpired:
+            raise Refused("Плагин не загрузился за 20 секунд (бесконечный цикл?).")
+    if result.returncode != 0:
+        lines = [line for line in result.stderr.splitlines() if "Error" in line] or result.stderr.splitlines()[-1:]
+        raise Refused("Плагин падает при загрузке: " + (lines[0].strip()[:300] if lines else "неизвестная ошибка"))
 
 
 def plugin_fields(kind, data):

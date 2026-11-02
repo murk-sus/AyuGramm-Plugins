@@ -66,6 +66,12 @@ Every download is checked against the SHA-256 in [`fonts/index.json`](fonts/inde
 | [NARROW X](fonts/narrow-x) | [@lwwlt](https://t.me/lwwlt) | Узкий высокий шрифт. Кириллица, латиница и цифры. |
 | [Slice Cut](fonts/slice-cut) | [@lwwlt](https://t.me/lwwlt) | Рубленые буквы с косым срезом. Кириллица, латиница и цифры. |
 
+## Plugins by other authors
+
+| Plugin | Author | Language | Version | What it does |
+|---|---|---|---|---|
+| [Visual Overlay](plugins/visual-overlay) | [@gurodesc](https://t.me/gurodesc) | JavaScript | 1.2 | золотой дождь **official** |
+
 <!-- catalog:end -->
 
 ## Installing
