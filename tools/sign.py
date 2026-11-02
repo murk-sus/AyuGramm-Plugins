@@ -19,7 +19,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-FILES = ("plugin.ayu.js", "plugin.ayu.py", "plugin.wasm", "plugin.iosplug")
+FILES = ("plugin.ayu.js", "plugin.ayu.py", "plugin.ayu.lua", "plugin.wasm", "plugin.iosplug")
 
 
 def main():
@@ -31,6 +31,11 @@ def main():
     for folder in sorted((ROOT / "plugins").iterdir()):
         path = next((folder / name for name in FILES if (folder / name).is_file()), None)
         if path is None:
+            continue
+        # Plugins by other authors (meta.json from the team bot) are signed only when the team
+        # marked them official there; this script must never promote them silently.
+        meta = folder / "meta.json"
+        if meta.is_file() and json.loads(meta.read_text(encoding="utf-8")).get("official") is not True:
             continue
         data = path.read_bytes()
         with tempfile.NamedTemporaryFile() as out:
