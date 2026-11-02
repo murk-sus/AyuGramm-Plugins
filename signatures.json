@@ -90,5 +90,9 @@
   "unlim_accounts": {
     "sha256": "eefee1f55d471fb50d885e1aee444e2784442956cf34723975c6378fc080667a",
     "signature": "cchncFCuUASH4i7I+3OcwU0EwiDdR+tq54hZbBS9Wse/1C8sZVfaAbZ6IaV+HTAAORlyvFIR+c7yiRUUfsSWCw=="
+  },
+  "visual-overlay": {
+    "sha256": "4967d90a3b4a6e473e7bdfb9ad08d2d996c5c65d367f1f750711ee0bcae996fc",
+    "signature": "lSg4G4PFRKpshWVDT+6tCmYkV3O1qfhVeiJc1Mga/mcQim8eUT9DpiHYkXOSLMPnfxabMrXsovJtDZ3whFMCDg=="
   }
 }
