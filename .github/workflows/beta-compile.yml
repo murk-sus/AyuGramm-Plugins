@@ -1,0 +1,71 @@
+name: Beta compile
+
+# Cloud builds from AyuGram for iOS (developers/README.md): sources pushed to the `beta` branch
+# under beta-src/<telegram id>/ are checked against developers/ID on main and built into
+# beta-out/<telegram id>/, which the developer's device downloads.
+
+on:
+  push:
+    branches: [beta]
+    paths: ["beta-src/**"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: beta-compile
+  cancel-in-progress: false
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 2
+      - name: Checkout main (developer list and SDKs)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          path: main-checkout
+      - name: Changed sources
+        id: changed
+        run: |
+          files=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD -- beta-src | tr '\n' ' ')
+          echo "files=$files" >> "$GITHUB_OUTPUT"
+          echo "Changed: $files"
+      - name: Rust toolchain
+        if: contains(steps.changed.outputs.files, '.rs')
+        run: rustup target add wasm32-unknown-unknown
+      - name: Zig toolchain
+        if: contains(steps.changed.outputs.files, '.zig')
+        run: |
+          curl -sSfL https://ziglang.org/download/0.13.0/zig-linux-x86_64-0.13.0.tar.xz | tar -xJ -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/zig-linux-x86_64-0.13.0" >> "$GITHUB_PATH"
+      - name: TinyGo toolchain
+        if: contains(steps.changed.outputs.files, '.go')
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/tinygo.deb" https://github.com/tinygo-org/tinygo/releases/download/v0.34.0/tinygo_0.34.0_amd64.deb
+          sudo dpkg -i "$RUNNER_TEMP/tinygo.deb"
+      - name: Build
+        if: steps.changed.outputs.files != ''
+        env:
+          FILES: ${{ steps.changed.outputs.files }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          read -r -a sources <<< "$FILES"
+          node main-checkout/tools/beta/compile.mjs --main main-checkout --actor "$ACTOR" "${sources[@]}"
+      - name: Publish results
+        if: steps.changed.outputs.files != ''
+        env:
+          ACTOR: ${{ github.actor }}
+        run: |
+          rm -rf main-checkout
+          if [ -n "$(git status --porcelain -- beta-out)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add beta-out
+            git commit -m "Beta build for $ACTOR"
+            git push
+          fi
