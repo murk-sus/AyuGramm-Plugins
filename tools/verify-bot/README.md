@@ -5,6 +5,14 @@ edits and signs `registry/verified.json` and adds fonts and plugins to the catal
 Secrets remain under `~/.config/ayugram-bot` (and the plugin key under
 `~/.config/ayugram-plugins`); never copy them into the repository.
 
+## Access
+
+Only the owner (`OWNER` in `bot.py`, 8276132300) sees **👥 Доступ** and can add or remove the
+Telegram IDs allowed to use the bot; the action itself re-checks the sender. The list is
+`~/.config/ayugram-bot/team.json`; without it the built-in `TEAM` applies, and the owner is
+always in it. A removed ID loses its password, session and unfinished upload at once; an added
+one writes /start to the bot and sets a password.
+
 ## Fonts and plugins
 
 **📦 Добавить шрифт или плагин** → send the file as a document → the author's Telegram @nick →

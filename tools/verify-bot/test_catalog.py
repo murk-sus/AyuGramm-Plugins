@@ -213,6 +213,7 @@ class BotUploadTests(unittest.TestCase):
         self.patch("send", side_effect=lambda chat, text, buttons=None: self.sent.append((text, buttons)))
         self.patch("call")
         self.patch("log")
+        self.patch("team", return_value=set(bot.TEAM))  # never the machine's real team.json
         self.patch("folder_files", return_value=[])
         self.patch("read_json", side_effect=lambda path, default: default)
         self.commit = self.patch("commit", return_value="abc123")

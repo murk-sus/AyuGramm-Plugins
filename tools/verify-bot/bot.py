@@ -17,6 +17,7 @@ Secrets stay on this machine, never in the repository:
   ~/.config/ayugram-bot/token             the bot token
   ~/.config/ayugram-bot/registry-key.pem  the registry signing key
   ~/.config/ayugram-bot/state.json        password hashes and conversation state
+  ~/.config/ayugram-bot/team.json         who may use the bot (edited only by OWNER, in the bot)
   ~/.config/ayugram-plugins/signing-key.pem  the plugin signing key ($AYU_SIGNING_KEY), optional
 GitHub access uses the `gh` login of this machine.
 
@@ -41,7 +42,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import catalog  # noqa: E402
 
-TEAM = {7556953433, 7864640050, 7754143736, 8276132300}
+# The owner alone decides who may use the bot; the list lives in team.json next to the token.
+OWNER = 8276132300
+TEAM = {7556953433, 7864640050, 7754143736, OWNER}  # the list before team.json existed
 CONFIG = Path(os.environ.get("AYU_BOT_CONFIG", Path.home() / ".config/ayugram-bot"))
 REPO = "murk-sus/AyuGramm-Plugins"
 REGISTRY_PATH = "registry/verified.json"
@@ -237,12 +240,83 @@ def publish(registry, message):
         github("PUT", path, body)
 
 
+# MARK: Team
+
+def team_path():
+    return CONFIG / "team.json"
+
+
+def team():
+    """Telegram IDs allowed to use the bot. The owner is always one of them."""
+    path = team_path()
+    try:
+        members = {int(member) for member in json.loads(path.read_text())["members"]} if path.is_file() else set(TEAM)
+    except (ValueError, KeyError, TypeError):
+        log("team.json is damaged; using the built-in list")
+        members = set(TEAM)
+    return members | {OWNER}
+
+
+def save_team(members):
+    path = team_path()
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(json.dumps({"members": sorted(members | {OWNER})}, indent=1))
+    os.chmod(temporary, 0o600)
+    temporary.replace(path)
+
+
+def team_menu(chat):
+    members = sorted(team())
+    lines = [f"{'👑' if member == OWNER else '•'} {member}" for member in members]
+    send(chat, "👥 Доступ к боту (плашки, шрифты, плагины):\n" + "\n".join(lines),
+         [("➕ Добавить ID", "t:add"), ("➖ Убрать ID", "t:remove"), ("⬅️ Назад", "t:back")])
+
+
+def change_team(state, chat, sender, user, text, adding):
+    if sender != OWNER:  # menus are per chat; the check that counts is here
+        user["step"] = "menu"
+        menu(chat)
+        return
+    target = text.strip().lstrip("@")
+    if not target.isascii() or not target.isdecimal() or not 0 < int(target) <= 2 ** 63 - 1:
+        send(chat, "Нужен числовой Telegram ID, например 123456789. /cancel — отмена.")
+        return
+    member = int(target)
+    members = team()
+    user["step"] = "menu"
+    if adding:
+        if member in members:
+            send(chat, f"{member} уже есть в списке.")
+        else:
+            save_team(members | {member})
+            if member in state["refused"]:
+                state["refused"].remove(member)
+            log("team add", member, "by", sender)
+            send(chat, f"✅ {member} добавлен. Пусть напишет боту /start и поставит пароль.")
+    else:
+        if member == OWNER:
+            send(chat, "Себя убрать нельзя.")
+        elif member not in members:
+            send(chat, f"{member} нет в списке.")
+        else:
+            save_team(members - {member})
+            # Access ends now: no password, no session, no half-finished upload.
+            removed = state["users"].pop(str(member), None)
+            if removed is not None:
+                drop_upload(member, {})
+            log("team remove", member, "by", sender)
+            send(chat, f"➖ {member} больше не может пользоваться ботом.")
+    team_menu(chat)
+
+
 # MARK: Conversation
 
 def menu(chat):
-    send(chat, "Что сделать?", [("✅ Выдать надпись", "grant"), ("❌ Забрать надпись", "revoke"), ("🖼 Баннер профиля", "banner"), ("📋 Список", "list"),
-                                ("📦 Добавить шрифт или плагин", "upload"), ("🗂 Каталог", "catalog"), ("🗑 Убрать из каталога", "remove"),
-                                ("🔒 Выйти", "logout")])
+    buttons = [("✅ Выдать надпись", "grant"), ("❌ Забрать надпись", "revoke"), ("🖼 Баннер профиля", "banner"), ("📋 Список", "list"),
+               ("📦 Добавить шрифт или плагин", "upload"), ("🗂 Каталог", "catalog"), ("🗑 Убрать из каталога", "remove")]
+    if chat == OWNER:  # private chats: the chat id is the user's id
+        buttons.append(("👥 Доступ", "team"))
+    send(chat, "Что сделать?", buttons + [("🔒 Выйти", "logout")])
 
 
 # MARK: Catalog uploads
@@ -492,7 +566,7 @@ def handle_message(state, message):
     text = (message.get("text") or "").strip()
     if message["chat"].get("type") != "private":
         return
-    if sender not in TEAM:
+    if sender not in team():
         if sender not in state["refused"]:
             state["refused"].append(sender)
             send(chat, "⛔ Доступ запрещён.")
@@ -608,6 +682,9 @@ def handle_message(state, message):
     if step == "remove_id":
         remove_item(chat, sender, user, text)
         return
+    if step in ("team_add", "team_remove"):
+        change_team(state, chat, sender, user, text, step == "team_add")
+        return
     if text.split(maxsplit=1)[:1] == ["/banner"]:
         parts = text.split(maxsplit=2)
         if len(parts) != 3 or banner_target(parts[1]) is None:
@@ -685,7 +762,7 @@ def handle_callback(state, query):
     sender = query.get("from", {}).get("id")
     chat = query.get("message", {}).get("chat", {}).get("id")
     call("answerCallbackQuery", callback_query_id=query["id"])
-    if sender not in TEAM or chat is None or query.get("message", {}).get("chat", {}).get("type") != "private":
+    if sender not in team() or chat is None or query.get("message", {}).get("chat", {}).get("type") != "private":
         return
     user = state["users"].setdefault(str(sender), {"step": "new"})
     if "hash" not in user or user.get("session", 0) < time.time() or user.get("locked_until", 0) > time.time():
@@ -738,6 +815,21 @@ def handle_callback(state, query):
         user.pop("removal", None)
         user["step"] = "menu"
         menu(chat)
+    elif data in ("team", "t:add", "t:remove", "t:back"):
+        if sender != OWNER:
+            send(chat, "⛔ Доступом управляет только владелец.")
+            menu(chat)
+        elif data == "team":
+            team_menu(chat)
+        elif data == "t:add":
+            user["step"] = "team_add"
+            send(chat, "Отправьте Telegram ID, которому дать доступ к боту. /cancel — отмена.")
+        elif data == "t:remove":
+            user["step"] = "team_remove"
+            send(chat, "Отправьте Telegram ID, у которого забрать доступ. /cancel — отмена.")
+        else:
+            user["step"] = "menu"
+            menu(chat)
     elif data == "logout":
         user["session"] = 0
         user["step"] = "password"
