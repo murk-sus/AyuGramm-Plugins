@@ -360,6 +360,23 @@
       "sha256": "eefee1f55d471fb50d885e1aee444e2784442956cf34723975c6378fc080667a",
       "size": 2036,
       "signature": "cchncFCuUASH4i7I+3OcwU0EwiDdR+tq54hZbBS9Wse/1C8sZVfaAbZ6IaV+HTAAORlyvFIR+c7yiRUUfsSWCw=="
+    },
+    {
+      "id": "visual-overlay",
+      "name": "Visual Overlay",
+      "author": "@gurodesc",
+      "version": "1.2",
+      "description": "золотой дождь",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/visual-overlay/plugin.ayu.js",
+      "sha256": "4967d90a3b4a6e473e7bdfb9ad08d2d996c5c65d367f1f750711ee0bcae996fc",
+      "size": 3535,
+      "screenshots": [
+        "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/visual-overlay/screenshot.jpg"
+      ],
+      "signature": "lSg4G4PFRKpshWVDT+6tCmYkV3O1qfhVeiJc1Mga/mcQim8eUT9DpiHYkXOSLMPnfxabMrXsovJtDZ3whFMCDg=="
     }
   ]
 }

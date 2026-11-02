@@ -99,6 +99,20 @@ class InspectTests(unittest.TestCase):
         item = catalog.inspect("thing.ayu.lua", LUA)
         self.assertEqual((item.kind, item.id, item.filename), ("lua", "lua-thing", "plugin.ayu.lua"))
 
+    def test_plugin_using_the_full_api_loads(self):
+        source = JS + b"ayu.settings.declare([{ key: 'x', type: 'toggle' }]);\nayu.ui.overlay.addClock({ id: 'c' }).hide();\n"
+        self.assertEqual(catalog.inspect("full.ayujs", source).kind, "js")
+
+    def test_plugin_that_throws_is_refused(self):
+        import shutil
+        if shutil.which("node") is None:
+            self.skipTest("node is not installed")
+        with self.assertRaises(catalog.Refused) as raised:
+            catalog.inspect("broken.ayujs", JS + b"throw new Error('boom');\n")
+        self.assertIn("boom", str(raised.exception))
+        with self.assertRaises(catalog.Refused):
+            catalog.inspect("broken.ayujs", JS + b"function (\n")
+
     def test_missing_header_field(self):
         with self.assertRaises(catalog.Refused):
             catalog.inspect("my.ayu.js", JS.replace(b"// @description Trims outgoing text.\n", b""))
