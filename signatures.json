@@ -7,6 +7,10 @@
     "sha256": "90f7ba9538d3b133ede72e4436d709c4928432e067ce98cd4bee8887ff9e0452",
     "signature": "oJ0cdxetk9Hdcg7rhH24UymcYTGebtCAc8ldeCrXsVUiQ3LWb769qXPd5Jl92/RGuWpvE449r4dcSJmC2MRhDA=="
   },
+  "chat-stats": {
+    "sha256": "2bcce06802721181c21c59bbd1380488f59bcb8d42a9a610f4b587b442339fc8",
+    "signature": "d6wTqPa6tULs5lwEFdRtS6m5uZdRnSmqLeZXqIksoQHfIHJ6ehITY5VenKeBs2Px07ok/TuXwlBtPU8zIMpAAg=="
+  },
   "chat_colors": {
     "sha256": "fccea2135ffd523a6f1edaab79ccbc869a3707c4b1ec388c67cd8a98dd278a92",
     "signature": "8ZW/jI37y3jtJBs0gZ9q5z6dEOOOpvQYnim2i6UjHTJbg66PRUBiTcEDlu8WMVzdRL1ubowwMUbhuSu9Z/uFDA=="
