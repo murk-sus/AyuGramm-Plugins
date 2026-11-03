@@ -8,6 +8,12 @@ AyuGram downloads [`index.json`](index.json) from this repository and lists ever
 
 | Plugin | Author | Version | What it does |
 |---|---|---|---|
+| [Bookmarks](plugins/bookmarks/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0.0 | "Bookmark" in the message menu: saves messages to a list you can open again |
+| [Chat statistics](plugins/chat-statistics/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0.0 | Statistics for the whole chat history from the message menu, loaded from Telegram |
+| [Describe photo](plugins/describe-photo/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0.0 | Describes a photo on the device (Vision) from the message menu |
+| [Download all media](plugins/download-all-media/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0.0 | Saves the photos, videos and files of the chat (up to the last 500) into one folder |
+| [Make sticker](plugins/make-sticker/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0.0 | Cuts the subject out of a photo and sends it as a sticker |
+| [Year in review](plugins/year-in-review/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0.0 | How much you talked in this chat since January 1, the busiest months and days |
 | [Clean links](plugins/clean-links/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0 | Removes tracking parameters (utm_*, fbclid, gclid, si, igsh…) from links you send, so they do not reveal where you found them |
 | [Layout fix](plugins/layout-fix/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0 | Fixes text typed in the wrong keyboard layout: "ghbdtn" → "привет", "руддщ" → "hello" |
 | [Minimal UI](plugins/minimal-ui/plugin.ayu.js) | murk-sus & dsn2fvhmn4-lgtm | 1.0 | A calmer Telegram: hides stories, similar channels, Premium statuses, the greeting sticker and the fast-share button while enabled |
@@ -71,6 +77,7 @@ Every download is checked against the SHA-256 in [`fonts/index.json`](fonts/inde
 | Plugin | Author | Language | Version | What it does |
 |---|---|---|---|---|
 | [Visual Overlay](plugins/visual-overlay) | [@gurodesc](https://t.me/gurodesc) | JavaScript | 1.2 | золотой дождь **official** |
+| [Статистика чата](plugins/chat-stats) | [@selfharmenthusiast](https://t.me/selfharmenthusiast) | JavaScript | 1.0.0 | Статистика последних доступных сообщений: входящие, исходящие, авторы и объём текста. **official** |
 
 <!-- catalog:end -->
 

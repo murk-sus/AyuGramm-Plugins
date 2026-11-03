@@ -18,6 +18,19 @@
       "signature": "HicSiTDVVYp9SUtvlY+jdoSCkh7POvnk0fiAzMo6Z0KtV8W9/+lNsRFWqogPvTlQt2pkLS0micZINQ3UiKuQCg=="
     },
     {
+      "id": "bookmarks",
+      "name": "Закладки",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "version": "1.0.0",
+      "description": "Пункт «В закладки» в меню сообщения. Закладки с тегами открываются в Настройки → AyuGram → Инструменты → Закладки.",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/bookmarks/plugin.ayu.js",
+      "sha256": "8c66f40443ad99c415ebaf086e956a10a702078e504c381f8455be3b6dcb8c38",
+      "size": 1198
+    },
+    {
       "id": "camera_flip",
       "name": "Camera Flip",
       "author": "murk-sus & dsn2fvhmn4-lgtm",
@@ -31,6 +44,36 @@
       "sha256": "90f7ba9538d3b133ede72e4436d709c4928432e067ce98cd4bee8887ff9e0452",
       "size": 2575,
       "signature": "oJ0cdxetk9Hdcg7rhH24UymcYTGebtCAc8ldeCrXsVUiQ3LWb769qXPd5Jl92/RGuWpvE449r4dcSJmC2MRhDA=="
+    },
+    {
+      "id": "chat-statistics",
+      "name": "Статистика чата (вся история)",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "version": "1.0.0",
+      "description": "Пункт «Статистика чата» в меню сообщения: авторы, слова, часы и дни активности по всем сообщениям чата, сохранённым на устройстве.",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat-statistics/plugin.ayu.js",
+      "sha256": "a6d931029502820cb5079efe9f28683b3d1a8bc0b9c3c279486821e2762a9674",
+      "size": 836
+    },
+    {
+      "id": "chat-stats",
+      "name": "Статистика чата",
+      "author": "@selfharmenthusiast",
+      "version": "1.0.0",
+      "description": "Статистика последних доступных сообщений: входящие, исходящие, авторы и объём текста.",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat-stats/plugin.ayu.js",
+      "sha256": "2bcce06802721181c21c59bbd1380488f59bcb8d42a9a610f4b587b442339fc8",
+      "size": 11875,
+      "screenshots": [
+        "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat-stats/screenshot.jpg"
+      ],
+      "signature": "d6wTqPa6tULs5lwEFdRtS6m5uZdRnSmqLeZXqIksoQHfIHJ6ehITY5VenKeBs2Px07ok/TuXwlBtPU8zIMpAAg=="
     },
     {
       "id": "chat_colors",
@@ -78,6 +121,32 @@
       "sha256": "17ddeef8f91d1152ac35b7b0010f25fc20feba1af844cc744454dd9deca7d5b9",
       "size": 263,
       "signature": "MP58ldG2b4Ltg49RupFJL32REGz/73r4zEFyjxoHzfvObGjmH0Is4rPeuRYbXM44gwIjqGqP9hbZfCRWCyVsAQ=="
+    },
+    {
+      "id": "describe-photo",
+      "name": "Описать фото",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "version": "1.0.0",
+      "description": "Пункт «Описать фото» в меню сообщения с фото: что на снимке и какой на нём текст. Распознаётся на устройстве, фото никуда не отправляется.",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/describe-photo/plugin.ayu.js",
+      "sha256": "664ff022078747132937a14051904bb973fb630eb39901bdf632e465db5434f0",
+      "size": 1037
+    },
+    {
+      "id": "download-all-media",
+      "name": "Скачать все медиа",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "version": "1.0.0",
+      "description": "Пункт «Скачать все медиа» в меню сообщения: сохраняет фото, видео и файлы чата (до 500 последних) в одну папку.",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/download-all-media/plugin.ayu.js",
+      "sha256": "72759d3b3da6b5e1e8048d17051165203a79c9f865819be1cd9c5d47e3aaa155",
+      "size": 816
     },
     {
       "id": "emoji-shortcuts-rs",
@@ -190,6 +259,19 @@
       "sha256": "f97b15941e13abc44d5cdcd2a7d307f1a21d9e14dbdad07a2f27f031d35fa143",
       "size": 2900,
       "signature": "QBPnMDY37kHSzkX5CI8LpvxomE0ktL2mhwnellpe5mCPzgd+OnkB9LxN2LDHjCvYkSyuRkeoDSBpYmQGlcPtBQ=="
+    },
+    {
+      "id": "make-sticker",
+      "name": "Сделать стикер",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "version": "1.0.0",
+      "description": "Пункт «Сделать стикер» в меню сообщения с фото: вырезает объект с фото и отправляет его стикером в открытый чат. Нужна iOS 17.",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/make-sticker/plugin.ayu.js",
+      "sha256": "36868b1151e92b10364378eaf3e7faf9138a6a69b4dc06b06600adaaff648ba4",
+      "size": 824
     },
     {
       "id": "mini_avatar",
@@ -377,6 +459,19 @@
         "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/visual-overlay/screenshot.jpg"
       ],
       "signature": "lSg4G4PFRKpshWVDT+6tCmYkV3O1qfhVeiJc1Mga/mcQim8eUT9DpiHYkXOSLMPnfxabMrXsovJtDZ3whFMCDg=="
+    },
+    {
+      "id": "year-in-review",
+      "name": "Итоги года",
+      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "version": "1.0.0",
+      "description": "Пункт «Итоги года» в меню сообщения: сколько вы переписывались в этом чате с 1 января, самые активные месяцы и дни.",
+      "tags": [],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/year-in-review/plugin.ayu.js",
+      "sha256": "478a1177e8f889bfc4ce9ceb05980cb9f7dd7979266f3f9dfa17bfd5c66a6394",
+      "size": 768
     }
   ]
 }
