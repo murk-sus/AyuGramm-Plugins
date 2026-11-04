@@ -1,7 +1,7 @@
 // ==AyuPlugin==
 // @id download-all-media
 // @name Скачать все медиа
-// @author murk-sus & dsn2fvhmn4-lgtm
+// @author murk-sus & neosay-dev
 // @version 1.0.0
 // @description Пункт «Скачать все медиа» в меню сообщения: сохраняет фото, видео и файлы чата (до 500 последних) в одну папку.
 // @permissions menu, messages.read

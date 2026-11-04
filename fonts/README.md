@@ -1,7 +1,7 @@
 # Font catalog
 
-AyuGram shows these fonts in the **Fonts** section of the plugin catalog and under
-**Settings → AyuGram → Appearance → Messages → Font catalog** (27.0: **WhiteGram → Font catalog**).
+VoidGram shows these fonts in the **Fonts** section of the plugin catalog and under
+**Settings → VoidGram → Appearance → Messages → Font catalog** (27.0: **WhiteGram → Font catalog**).
 Choosing one downloads it, checks it against the SHA-256 in [`index.json`](index.json) and makes
 it the app font (after a relaunch).
 

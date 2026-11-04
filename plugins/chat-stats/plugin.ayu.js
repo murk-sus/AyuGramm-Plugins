@@ -3,7 +3,7 @@
 // @name Статистика чата
 // @author @selfharmenthusiast
 // @version 1.0.0
-// @description Статистика до 100 последних доступных сообщений: входящие, исходящие, авторы и объём текста. AyuGramm SDK 27.5.
+// @description Статистика до 100 последних доступных сообщений: входящие, исходящие, авторы и объём текста. VoidGram SDK 27.5.
 // @permissions messages.read, screens, ui, menu, clipboard, commands
 // ==/AyuPlugin==
 
@@ -145,7 +145,7 @@
         if (peerId == null || String(peerId) === '') { ayu.toast('Открой чат и нажми «Статистика».'); return; }
         if (busy) { ayu.toast('Статистика уже загружается…'); return; }
         if (!ayu.messages || typeof ayu.messages.get !== 'function' || !ayu.screens || typeof ayu.screens.show !== 'function') {
-            ayu.toast('Нужна IPA AyuGramm с SDK 27.5: messages.get и screens.show.'); return;
+            ayu.toast('Нужна IPA VoidGram с SDK 27.5: messages.get и screens.show.'); return;
         }
         busy = true;
         var token = ++generation;

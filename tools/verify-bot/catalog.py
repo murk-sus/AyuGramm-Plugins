@@ -24,7 +24,7 @@ ID = re.compile(r"^[a-z0-9_-]{1,64}$")
 NICK = re.compile(r"^@[A-Za-z0-9_]{4,32}$")
 FONT_MAX_BYTES = 15 * 1024 * 1024
 PLUGIN_FILES = ("plugin.ayu.js", "plugin.ayu.py", "plugin.ayu.lua", "plugin.wasm", "plugin.iosplug")
-# Every spelling AyuGram accepts: ".ayu.js", ".ayujs" and plain ".js" are all JavaScript, and so on.
+# Every spelling VoidGram accepts: ".ayu.js", ".ayujs" and plain ".js" are all JavaScript, and so on.
 EXTENSIONS = {
     "js": ("ayu.js", "ayujs", "js"),
     "python": ("ayu.py", "ayupy", "py"),
