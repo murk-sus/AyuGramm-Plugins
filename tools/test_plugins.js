@@ -1,4 +1,4 @@
-// Loads every catalog plugin against a stand-in of the AyuGram `ayu` API and checks it
+// Loads every catalog plugin against a stand-in of the VoidGram `ayu` API and checks it
 // registers cleanly; plugins with known behaviour get concrete assertions.
 //   node tools/test_plugins.js               every plugin in plugins/
 //   node tools/test_plugins.js FILE...       only these files (the team bot checks uploads this way)

@@ -1,6 +1,6 @@
 name: Beta compile
 
-# Cloud builds from AyuGram for iOS (developers/README.md): sources pushed to the `beta` branch
+# Cloud builds from VoidGram for iOS (developers/README.md): sources pushed to the `beta` branch
 # under beta-src/<telegram id>/ are checked against developers/ID on main and built into
 # beta-out/<telegram id>/, which the developer's device downloads.
 

@@ -82,7 +82,7 @@ for (const file of walk(path.join(root, "plugins"))) {
 }
 
 const index = JSON.parse(fs.readFileSync(path.join(root, "index.json"), "utf8"));
-const prefix = "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/";
+const prefix = "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/";
 for (const plugin of index.plugins) {
   if (!plugin.url?.startsWith(prefix)) { problems.push(`index.json: ${plugin.id} has a url outside this repository`); continue; }
   const file = path.join(root, plugin.url.slice(prefix.length));

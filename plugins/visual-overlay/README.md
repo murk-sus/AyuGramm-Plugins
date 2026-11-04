@@ -10,4 +10,4 @@
 
 **Файлы:** [meta.json](meta.json), [plugin.ayu.js](plugin.ayu.js), [screenshot.jpg](screenshot.jpg)
 
-Установка: AyuGram → Плагины → значок сумки (каталог). Файл проверяется по SHA-256 `4967d90a3b4a6e473e7bdfb9ad08d2d996c5c65d367f1f750711ee0bcae996fc`.
+Установка: VoidGram → Плагины → значок сумки (каталог). Файл проверяется по SHA-256 `4967d90a3b4a6e473e7bdfb9ad08d2d996c5c65d367f1f750711ee0bcae996fc`.

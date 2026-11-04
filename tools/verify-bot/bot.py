@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""@ayugram_dev_settings_bot: AyuGram for iOS team bot.
+"""@ayugram_dev_settings_bot: VoidGram for iOS team bot.
 
 Only the team's Telegram IDs may use it; everyone else is refused. Each team member sets a
 password (typed twice) and enters it to unlock the bot. Then they can grant or revoke the
-"verified by the AyuGram for iOS team" label for a Telegram user, with a custom text or one of
+"verified by the VoidGram for iOS team" label for a Telegram user, with a custom text or one of
 the classic ones, and add fonts and plugins to the catalog: send the file, name its author
-(their Telegram @nick) and a description, and the bot commits it to github.com/murk-sus/AyuGramm-Plugins.
+(their Telegram @nick) and a description, and the bot commits it to github.com/murk-sus/VoidGram-plugins.
 The Catalog workflow there rebuilds index.json, fonts/index.json and the README; the bot reports
-when it has finished. Plugins can be signed as official with the AyuGram plugin key.
+when it has finished. Plugins can be signed as official with the VoidGram plugin key.
 
-The list lives in registry/verified.json of github.com/murk-sus/AyuGramm-Plugins, signed with
-Ed25519 (registry/verified.json.sig). Every AyuGram client downloads it, checks the signature
+The list lives in registry/verified.json of github.com/murk-sus/VoidGram-plugins, signed with
+Ed25519 (registry/verified.json.sig). Every VoidGram client downloads it, checks the signature
 with the public key built into the app and shows the label.
 
 Secrets stay on this machine, never in the repository:
@@ -46,7 +46,7 @@ import catalog  # noqa: E402
 OWNER = 8276132300
 TEAM = {7556953433, 7864640050, 7754143736, OWNER}  # the list before team.json existed
 CONFIG = Path(os.environ.get("AYU_BOT_CONFIG", Path.home() / ".config/ayugram-bot"))
-REPO = "murk-sus/AyuGramm-Plugins"
+REPO = "murk-sus/VoidGram-plugins"
 REGISTRY_PATH = "registry/verified.json"
 GH = os.environ.get("AYU_BOT_GH", str(Path.home() / ".local/bin/gh"))
 SESSION_SECONDS = 30 * 60
@@ -58,9 +58,9 @@ KIND_TITLES = {"font": "Шрифт", "js": "Плагин JavaScript", "python": 
                "wasm": "Плагин Rust (WebAssembly)", "iosplug": "Нативный плагин (.iosplug)"}
 
 CLASSIC = {
-    "sponsor": "Этот пользователь спонсирует AyuGram",
-    "developer": "Этот человек является разработчиком AyuGram",
-    "plugins": "Этот человек официально подтверждён как создатель плагинов для AyuGram",
+    "sponsor": "Этот пользователь спонсирует VoidGram",
+    "developer": "Этот человек является разработчиком VoidGram",
+    "plugins": "Этот человек официально подтверждён как создатель плагинов для VoidGram",
 }
 
 def log(*parts):
@@ -434,7 +434,7 @@ def confirm_upload(chat, user):
     else:
         lines.append("Скриншот: " + ("остаётся прежний" if upload.get("update") else "нет"))
     if upload["kind"] != "font":
-        lines.append("Подпись: " + ("официальный (подписан ключом AyuGram)" if upload.get("sign") else "без подписи"))
+        lines.append("Подпись: " + ("официальный (подписан ключом VoidGram)" if upload.get("sign") else "без подписи"))
     user["step"] = "upload_confirm"
     send(chat, "\n".join(lines) + "\n\nОпубликовать?", [("✅ Опубликовать", "u:publish"), ("✖️ Отмена", "u:cancel")])
 
@@ -586,7 +586,7 @@ def handle_message(state, message):
 
     if step == "new" or (text == "/start" and "hash" not in user):
         user["step"] = "set_password"
-        send(chat, "👋 Бот верификации AyuGram для iOS.\n\nПоставьте пароль (не короче 6 символов). Сообщение с паролем будет удалено.")
+        send(chat, "👋 Бот верификации VoidGram для iOS.\n\nПоставьте пароль (не короче 6 символов). Сообщение с паролем будет удалено.")
         return
     if step == "set_password":
         if len(text) < 6:
@@ -674,7 +674,7 @@ def handle_message(state, message):
             user["upload"]["description"] = " ".join(text.split())
         if user["upload"]["kind"] != "font" and PLUGIN_KEY.is_file():
             user["step"] = "upload_sign"
-            send(chat, "Подписать плагин ключом AyuGram? Подписанный считается официальным и может встраиваться в приложение. "
+            send(chat, "Подписать плагин ключом VoidGram? Подписанный считается официальным и может встраиваться в приложение. "
                        "Подписывайте только код, который прочитали.", [("✍️ Подписать", "u:sign"), ("Без подписи", "u:nosign")])
         else:
             ask_screenshot(chat, user)
@@ -719,7 +719,7 @@ def handle_message(state, message):
                 send(chat, f"У {target} нет надписи.")
             else:
                 publish(registry, f"Verified registry: revoke {target}")
-                send(chat, f"❌ Надпись у {target} забрана. Клиенты AyuGram обновят список в течение часа.")
+                send(chat, f"❌ Надпись у {target} забрана. Клиенты VoidGram обновят список в течение часа.")
                 log("revoke", target, "by", sender)
             user["step"] = "menu"
             menu(chat)
@@ -752,7 +752,7 @@ def grant(state, chat, sender, user, kind, text):
     registry["entries"].append(entry)
     publish(registry, f"Verified registry: grant {target}")
     user.pop("target", None)
-    send(chat, f"✅ {target}: «{text}»\n\nНадпись увидят все пользователи AyuGram для iOS в течение часа.")
+    send(chat, f"✅ {target}: «{text}»\n\nНадпись увидят все пользователи VoidGram для iOS в течение часа.")
     log("grant", target, kind, "by", sender)
     user["step"] = "menu"
     menu(chat)

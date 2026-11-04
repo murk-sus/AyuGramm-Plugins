@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate every plugin and write index.json, the catalog AyuGram downloads.
+"""Validate every plugin and write index.json, the catalog VoidGram downloads.
 
 Each plugin lives in plugins/<id>/ as either
 - plugin.ayu.js: a JavaScript code plugin with an `// ==AyuPlugin==` header (kind "js"), or
@@ -8,7 +8,7 @@ Each plugin lives in plugins/<id>/ as either
 - plugin.wasm: a Rust/WebAssembly plugin with an `ayu.manifest` custom section (kind "wasm"),
 - plugin.iosplug: a native plugin card, `ayu-iosplug-1` or `ayu-iosplug-2` (kind "iosplug").
 `@inject true` (or `"inject": true`) marks plugins that change the app itself (player, lyrics);
-the app installs those only with an AyuGram signature, which tools/sign.py writes to
+the app installs those only with a VoidGram signature, which tools/sign.py writes to
 signatures.json with the private key kept outside the repository.
 The index carries the SHA-256 of each file; the app refuses a download that does not match.
 """
@@ -19,12 +19,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/"
+RAW = "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/"
 ID = re.compile(r"^[a-z0-9_-]{1,64}$")
 REQUIRED = ("id", "name", "author", "version", "description")
 MAX_BYTES = 512 * 1024
-# Every plugin in this catalog is made and maintained by the AyuGramm team.
-CATALOG_AUTHOR = "murk-sus & dsn2fvhmn4-lgtm"
+# Every plugin in this catalog is made and maintained by the VoidGram team.
+CATALOG_AUTHOR = "murk-sus & neosay-dev"
 MAX_IOSPLUG_BYTES = 64 * 1024
 MAX_WASM_BYTES = 2 * 1024 * 1024
 # A plugin folder may also hold a screenshot (and a README.md written by tools/build_readme.py).
