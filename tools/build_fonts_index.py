@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write fonts/index.json, the font catalog AyuGram downloads.
+"""Write fonts/index.json, the font catalog VoidGram downloads.
 
 Each font lives in fonts/<id>/ with one font.ttf or font.otf, a font.json and optionally a
 screenshot.png / .jpg / .webp preview:
@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/"
+RAW = "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/"
 ID = re.compile(r"^[a-z0-9_-]{1,64}$")
 MAX_BYTES = 15 * 1024 * 1024
 

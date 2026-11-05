@@ -1,7 +1,7 @@
 // ==AyuPlugin==
 // @id chat-statistics
 // @name Статистика чата (вся история)
-// @author murk-sus & dsn2fvhmn4-lgtm
+// @author murk-sus & neosay-dev
 // @version 1.0.0
 // @description Пункт «Статистика чата» в меню сообщения: авторы, слова, часы и дни активности по всем сообщениям чата, сохранённым на устройстве.
 // @permissions menu, messages.read

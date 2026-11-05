@@ -1,7 +1,7 @@
 // ==AyuPlugin==
 // @id layout-fix
 // @name Layout fix
-// @author murk-sus & dsn2fvhmn4-lgtm
+// @author murk-sus & neosay-dev
 // @version 1.0
 // @description Fixes text typed in the wrong keyboard layout: "ghbdtn" → "привет", "руддщ" → "hello". Only whole messages that clearly look mistyped are changed.
 // @tags text, keyboard

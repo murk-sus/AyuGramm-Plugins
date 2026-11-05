@@ -5,14 +5,14 @@
     {
       "id": "acd",
       "name": "Album Cover Downloader",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Сохраняет доступное превью обложки аудиофайла в Фото.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/acd/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/acd/plugin.iosplug",
       "sha256": "77f409294eaef31e08cf38057e15381879fae4f5a8368c8a8c6f1c81eb2a7010",
       "size": 250,
       "signature": "HicSiTDVVYp9SUtvlY+jdoSCkh7POvnk0fiAzMo6Z0KtV8W9/+lNsRFWqogPvTlQt2pkLS0micZINQ3UiKuQCg=="
@@ -20,27 +20,27 @@
     {
       "id": "bookmarks",
       "name": "Закладки",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.0",
-      "description": "Пункт «В закладки» в меню сообщения. Закладки с тегами открываются в Настройки → AyuGram → Инструменты → Закладки.",
+      "description": "Пункт «В закладки» в меню сообщения. Закладки с тегами открываются в Настройки → VoidGram → Инструменты → Закладки.",
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/bookmarks/plugin.ayu.js",
-      "sha256": "8c66f40443ad99c415ebaf086e956a10a702078e504c381f8455be3b6dcb8c38",
-      "size": 1198
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/bookmarks/plugin.ayu.js",
+      "sha256": "1055fd00e7437462ac116d8ecc66d5872d9895ceab3120efd88120e2d970d009",
+      "size": 1194
     },
     {
       "id": "camera_flip",
       "name": "Camera Flip",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "0.2.0-ios.1",
       "description": "Switch the round-video camera using vertical swipes or double taps. Gesture mode and haptic feedback are configurable.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/camera_flip/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/camera_flip/plugin.iosplug",
       "sha256": "90f7ba9538d3b133ede72e4436d709c4928432e067ce98cd4bee8887ff9e0452",
       "size": 2575,
       "signature": "oJ0cdxetk9Hdcg7rhH24UymcYTGebtCAc8ldeCrXsVUiQ3LWb769qXPd5Jl92/RGuWpvE449r4dcSJmC2MRhDA=="
@@ -48,15 +48,15 @@
     {
       "id": "chat-statistics",
       "name": "Статистика чата (вся история)",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.0",
       "description": "Пункт «Статистика чата» в меню сообщения: авторы, слова, часы и дни активности по всем сообщениям чата, сохранённым на устройстве.",
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat-statistics/plugin.ayu.js",
-      "sha256": "a6d931029502820cb5079efe9f28683b3d1a8bc0b9c3c279486821e2762a9674",
-      "size": 836
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/chat-statistics/plugin.ayu.js",
+      "sha256": "00e2030a6d77ecf95488209e57a85167583f30b30a050496d0f7c4b580299989",
+      "size": 831
     },
     {
       "id": "chat-stats",
@@ -67,25 +67,25 @@
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat-stats/plugin.ayu.js",
-      "sha256": "2bcce06802721181c21c59bbd1380488f59bcb8d42a9a610f4b587b442339fc8",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/chat-stats/plugin.ayu.js",
+      "sha256": "90dbe82a76f6c4096f9f83f255788e7aadd0aaac15484c9899dcef4abd668832",
       "size": 11875,
       "screenshots": [
-        "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat-stats/screenshot.jpg"
+        "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/chat-stats/screenshot.jpg"
       ],
-      "signature": "d6wTqPa6tULs5lwEFdRtS6m5uZdRnSmqLeZXqIksoQHfIHJ6ehITY5VenKeBs2Px07ok/TuXwlBtPU8zIMpAAg=="
+      "signature": "3NsUZ8ag+NtoCpbaaI9mfMGcyBid8qbpFVoUscFFsyuZ7Fl3P2JViNHp0uR1/o96kk2caRAidipqSH5zwbZ1CQ=="
     },
     {
       "id": "chat_colors",
       "name": "Chat Colors",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0-ios.1",
       "description": "Per-chat colors in the chat list, nine presets, custom HEX, brightness, colored-chat management and reset.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/chat_colors/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/chat_colors/plugin.iosplug",
       "sha256": "fccea2135ffd523a6f1edaab79ccbc869a3707c4b1ec388c67cd8a98dd278a92",
       "size": 2744,
       "signature": "8ZW/jI37y3jtJBs0gZ9q5z6dEOOOpvQYnim2i6UjHTJbg66PRUBiTcEDlu8WMVzdRL1ubowwMUbhuSu9Z/uFDA=="
@@ -93,7 +93,7 @@
     {
       "id": "clean-links",
       "name": "Clean links",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Removes tracking parameters (utm_*, fbclid, gclid, si, igsh…) from links you send, so they do not reveal where you found them.",
       "tags": [
@@ -102,22 +102,22 @@
       ],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/clean-links/plugin.ayu.js",
-      "sha256": "342d9a9c9f0b2f77e90ffaee5e1824765105783587ed70dc112629cb74c75ef3",
-      "size": 1122,
-      "signature": "EYL9bPq6Sl6u4NxFDHKEytylDGtBBol96oNBE7jU6nF5+ml7NpwA3Yrbe2tUSjhjDk8MPO0np1tFtUoHN5NcBw=="
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/clean-links/plugin.ayu.js",
+      "sha256": "2edb8f89547289192b984532f12bb67d7e7b4edff7e91173117c78b109fe1ec5",
+      "size": 1117,
+      "signature": "TivmuDeg4Zb1ghKH2BE1MJeQOyvUeBATbkkUWE+/ND66O8fPKeyYgtrGQ+JnBZ0QbV3WxWUvKYuGFSYojN4ACA=="
     },
     {
       "id": "del_my_msgs",
       "name": "Delete My Messages",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Поиск и удаление своих сообщений в чате после подтверждения.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/del_my_msgs/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/del_my_msgs/plugin.iosplug",
       "sha256": "17ddeef8f91d1152ac35b7b0010f25fc20feba1af844cc744454dd9deca7d5b9",
       "size": 263,
       "signature": "MP58ldG2b4Ltg49RupFJL32REGz/73r4zEFyjxoHzfvObGjmH0Is4rPeuRYbXM44gwIjqGqP9hbZfCRWCyVsAQ=="
@@ -125,33 +125,33 @@
     {
       "id": "describe-photo",
       "name": "Описать фото",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.0",
       "description": "Пункт «Описать фото» в меню сообщения с фото: что на снимке и какой на нём текст. Распознаётся на устройстве, фото никуда не отправляется.",
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/describe-photo/plugin.ayu.js",
-      "sha256": "664ff022078747132937a14051904bb973fb630eb39901bdf632e465db5434f0",
-      "size": 1037
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/describe-photo/plugin.ayu.js",
+      "sha256": "545db9bf9b083ea3804cd7f3d67e3cc014740a22b01f33e81276aa1587b7e890",
+      "size": 1032
     },
     {
       "id": "download-all-media",
       "name": "Скачать все медиа",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.0",
       "description": "Пункт «Скачать все медиа» в меню сообщения: сохраняет фото, видео и файлы чата (до 500 последних) в одну папку.",
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/download-all-media/plugin.ayu.js",
-      "sha256": "72759d3b3da6b5e1e8048d17051165203a79c9f865819be1cd9c5d47e3aaa155",
-      "size": 816
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/download-all-media/plugin.ayu.js",
+      "sha256": "23caf9de49f7b9790d3bd6ff3d7f800f936ee5ac125bdfc27d144d90b79254ec",
+      "size": 811
     },
     {
       "id": "emoji-shortcuts-rs",
       "name": "Emoji shortcuts (Rust)",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Rust plugin: :fire:, :heart:, :ok:, :lol:, :100: and other shortcuts become emoji in messages you send.",
       "tags": [
@@ -161,7 +161,7 @@
       ],
       "kind": "wasm",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/emoji-shortcuts-rs/plugin.wasm",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/emoji-shortcuts-rs/plugin.wasm",
       "sha256": "b59815c9870db5b5e5ac602e0567373a80da832cb493714cd3317f80fb5831d4",
       "size": 59938,
       "signature": "CqT57Ey4AwyuUjXObPDfNxQx1Woh3efAc5UcIEZ88I0RefECM8YxJ2YGeWyo6LC+lv9FiaXSMFgboxfYlSKqBA=="
@@ -169,14 +169,14 @@
     {
       "id": "formatted_copy",
       "name": "formatted copy",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.0-ios.1",
       "description": "Native message copying with author, optional date/time, media labels and available reply quotes.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/formatted_copy/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/formatted_copy/plugin.iosplug",
       "sha256": "82b258f996e1996a8189ca2e3a0c3f00cfb1fe45ca1d2f11bf3a709c7d35bb7b",
       "size": 2267,
       "signature": "Nf/TqTxak4UjeoT3I65ApxNhMzo1PuLIrlooWZQC1oUPmkW6fvBcw/Bl3WtaDAfs7WFyKTTC+BdAWtEIjWpABA=="
@@ -184,14 +184,14 @@
     {
       "id": "game_arcade",
       "name": "Arcade Games",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.1",
       "description": "2048, Flappy Bird and Chrome Dino through the existing native Arcade Games bridge.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/game_arcade/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/game_arcade/plugin.iosplug",
       "sha256": "e782531caed568006672834cd3a6261be880c9d81509314f23eb062666bb7411",
       "size": 2342,
       "signature": "b/3ZERxiok38W1YdvsQlOuG0itko00DCmpmINppu5Q+hsYsUzp58R06HUcWWZmIy7VzY2lOHLuyK9O4By/kTCw=="
@@ -199,14 +199,14 @@
     {
       "id": "group_mentions",
       "name": "Group Mentions",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.2-ios.1",
       "description": "Native saved username groups with whole-command expansion and a per-chat cooldown.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/group_mentions/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/group_mentions/plugin.iosplug",
       "sha256": "dad7e67888412f2ae28fb877e2c04a8d9cb98d5e002c423f8888fb07367b19d4",
       "size": 2051,
       "signature": "T3p1s3fqTnBXkSC0L/LyA2avEWFUzTkQ9zxJcdwfjj6cvVZf36gDT8u64qnBm6AahmQKFvLqeggVoScMSIPqCA=="
@@ -214,14 +214,14 @@
     {
       "id": "hide_attach_buttons",
       "name": "HideAttachButtons",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Скрывает выбранные разделы меню вложений.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/hide_attach_buttons/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/hide_attach_buttons/plugin.iosplug",
       "sha256": "4e85a488a95dbd3337f38bb6fbe74ee9e1c94f230ebc031580faa1316aa56935",
       "size": 257,
       "signature": "o/twLnMilwUaZswXZOQKRR/5QwW/RGCp92RIxbQLWN9IJvffbUvam0mtADUwFefSSVDGeKIUUA84hERqAxdNDA=="
@@ -229,7 +229,7 @@
     {
       "id": "layout-fix",
       "name": "Layout fix",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Fixes text typed in the wrong keyboard layout: \"ghbdtn\" → \"привет\", \"руддщ\" → \"hello\". Only whole messages that clearly look mistyped are changed.",
       "tags": [
@@ -238,52 +238,52 @@
       ],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/layout-fix/plugin.ayu.js",
-      "sha256": "bb16bd94a5a94e30d0205753ee3043651f40127d6c45f557fcf686feb4674ab1",
-      "size": 1985,
-      "signature": "bvcRMBOMxuvyCF407ZaM+5ecNfwIpib12EEHXtt+WGT6UnlRp/7OnIKG97aeXyenCGHLLGL48VfVe+aDnIHvBw=="
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/layout-fix/plugin.ayu.js",
+      "sha256": "26f0b54af5dae8f653195e02b168e2671100c578c5375dfdeae328cd25cd7fe0",
+      "size": 1980,
+      "signature": "s1cWFIo+uPT5Wz7cdI7WUxbaoNjqMd6klvLb5YkW+A4p+dExGHdOSZ26nJQCRFR1wLfUeJgiSv9N+2jW0ojoDg=="
     },
     {
       "id": "lyrics-cleaner",
       "name": "Lyrics cleaner",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
-      "description": "Python plugin: removes \"[Куплет 1]\", \"Припев:\", \"(x2)\" and similar labels from song lyrics. Switches in Settings → AyuGram → Lyrics sources.",
+      "description": "Python plugin: removes \"[Куплет 1]\", \"Припев:\", \"(x2)\" and similar labels from song lyrics. Switches in Settings → VoidGram → Lyrics sources.",
       "tags": [
         "lyrics",
         "python"
       ],
       "kind": "python",
       "injects": true,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/lyrics-cleaner/plugin.ayu.py",
-      "sha256": "f97b15941e13abc44d5cdcd2a7d307f1a21d9e14dbdad07a2f27f031d35fa143",
-      "size": 2900,
-      "signature": "QBPnMDY37kHSzkX5CI8LpvxomE0ktL2mhwnellpe5mCPzgd+OnkB9LxN2LDHjCvYkSyuRkeoDSBpYmQGlcPtBQ=="
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/lyrics-cleaner/plugin.ayu.py",
+      "sha256": "07781431f3aded766057915f9117fe321fbf696a3edbadc02c98e3d15d5bff5d",
+      "size": 2896,
+      "signature": "b4JYBnipYVEoy/c7UJqPjhUuqJEcy+XjBDcrTV6GxWXSwVIkNpQLo1YteFph8y8fMyBiA8ABbuB8zsmymLQ4Dg=="
     },
     {
       "id": "make-sticker",
       "name": "Сделать стикер",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.0",
       "description": "Пункт «Сделать стикер» в меню сообщения с фото: вырезает объект с фото и отправляет его стикером в открытый чат. Нужна iOS 17.",
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/make-sticker/plugin.ayu.js",
-      "sha256": "36868b1151e92b10364378eaf3e7faf9138a6a69b4dc06b06600adaaff648ba4",
-      "size": 824
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/make-sticker/plugin.ayu.js",
+      "sha256": "ff78cbbcaf2a80f3a4125ebf152d72029b22ea4bfae980ec69b4ae4528120b0b",
+      "size": 819
     },
     {
       "id": "mini_avatar",
       "name": "Mini Avatar",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Размер аватаров около сообщений: 18–34 точки.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/mini_avatar/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/mini_avatar/plugin.iosplug",
       "sha256": "6f255753ce27536280e3b56027e7f53f7943b2ab333d4ac74de39cb7dab61b73",
       "size": 228,
       "signature": "99SOTg5CQW2vgRvj6FxTFqT9kR0u3m7pCJ68j/ueUhkTmjPvC16JE3sAJ9uCJ9Vk4HoAQ99L82iWjlK2F9SbBw=="
@@ -291,7 +291,7 @@
     {
       "id": "minimal-ui",
       "name": "Minimal UI",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "A calmer Telegram: hides stories, similar channels, Premium statuses, the greeting sticker and the fast-share button while enabled. Turning the plugin off brings everything back.",
       "tags": [
@@ -299,22 +299,22 @@
       ],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/minimal-ui/plugin.ayu.js",
-      "sha256": "5172dbca31f5234e85e809717140ca4ab0bed8ec633a0f0e9501080998aed15f",
-      "size": 512,
-      "signature": "mLFFu3BZBwz1okA2Tqm03/7by2tVEUdEtGSipVlEou8Wmc7MFyEWC1Nj5iG91g/xoEXGJLBlysJBZGmXLAycAQ=="
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/minimal-ui/plugin.ayu.js",
+      "sha256": "c78da7bd48b1785baa4a4f242fdf7e373ce83f3e159d1d105706fc5a082a5a25",
+      "size": 507,
+      "signature": "AuCTguxEnCBFEACaO/1FV4V/DC59fgSR7lklPOctAoXjo4k0/0rH6FZNg2T9rf5PXEjo7N9aB+E4kOUKlHzhBw=="
     },
     {
       "id": "petpet",
       "name": "petpet",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.6-ios.1",
       "description": "Native petpet GIF composition from a chat avatar or an image in Files, with preview and configurable resolution/frame delay.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/petpet/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/petpet/plugin.iosplug",
       "sha256": "d22aea32a34f25495c58f7d09821b69b9a2437449a5b642620b726209ace06c2",
       "size": 2303,
       "signature": "XtGzJ/wGWO9X5SqnVzDasWWDx+00WjjdXMjsjUOVswalF9omPrumtlIUv4xfHE9pc2EGwR5W+TxH7VqzPnWkAw=="
@@ -322,14 +322,14 @@
     {
       "id": "pill_labels",
       "name": "Pill Labels",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Обводка и фон подписей полей профиля, шесть цветов.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/pill_labels/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/pill_labels/plugin.iosplug",
       "sha256": "9df804418ba589bb588065312d1d8278cddc7a35a9aa4a788309464f4d1bc0d6",
       "size": 250,
       "signature": "Lyw7qO2lgz+b4S7t0P0rl8fepB2SVWjHlIP5DTmNv1ICZo+lw5Ckv5RCfZHClQypfKV9fN8zl1y6Y00SuCbJDw=="
@@ -337,14 +337,14 @@
     {
       "id": "reactions_total",
       "name": "Reactions Total",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "2.0.0-ios.1",
       "description": "Reaction totals in the message timestamp line, with compact counts, paid-reaction and channel filters.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/reactions_total/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/reactions_total/plugin.iosplug",
       "sha256": "60d04f5ce1f5acbde483af2d5099c3ffab06b8609237b1dc89919ee60910d645",
       "size": 2162,
       "signature": "EDHlnzGH7cBniVgJyUFCbrCo3rI+jahl2F/kQxUfvkZXUS/uOv8OZqQMmv4J4GUC6yrlVjFLSVJN6aSoJL87AQ=="
@@ -352,14 +352,14 @@
     {
       "id": "search_plus",
       "name": "Search+ for iOS",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "2.6.1-ios.2",
       "description": "Multi-term search in the current chat/topic. The API 9 base app also provides author, date-range and media-type filters.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/search_plus/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/search_plus/plugin.iosplug",
       "sha256": "48d732d0359334850eca62c335908610b0556b363c4b1891b020e5570a4bc01a",
       "size": 2630,
       "signature": "ldTG+NZ0FqlGlKkbMDAWo6Zw6xHxIA+ijPEjfpJhiEzeyfLbPoEOeo+tNPkdsUeGT7YUMazwRAKGRNK2wpWXBQ=="
@@ -367,14 +367,14 @@
     {
       "id": "service_cleaner",
       "name": "Service Cleaner",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Удаление загруженных служебных сообщений после подтверждения.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/service_cleaner/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/service_cleaner/plugin.iosplug",
       "sha256": "a583f76d7e05b8e4318ca2a19de64ef4eb8d62d8ff6c399d49926d54f0b7d402",
       "size": 284,
       "signature": "LZ5/5f4lidS78Tw2NNLBL69UACsWInpl5u25H9t4JFm+W271IRfbx1fbu5gMe64aHCfnETLNNiyeUM29Q8l2BA=="
@@ -382,7 +382,7 @@
     {
       "id": "smart-quotes",
       "name": "Smart quotes",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.1",
       "description": "Straight quotes become «ёлочки» in Russian text and “curly” quotes otherwise; \"--\" becomes an em dash.",
       "tags": [
@@ -391,22 +391,22 @@
       ],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart-quotes/plugin.ayu.js",
-      "sha256": "67c6b11c24a8e44b59dfded15868d24aa17dd6f0cdba25b8be7a0026e9829f69",
-      "size": 674,
-      "signature": "PZPuO6VLBbGZXo3+L1Q/49IE32hXrTffjmhsoJ3QAij9K1MyIiMKS7o43QJHUM1FLIGVcq+iGVmf4GxEanHJBg=="
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/smart-quotes/plugin.ayu.js",
+      "sha256": "71dc04e283964fcd73527955975907881e1a0429d19ccea975edd3f5f8d58b0b",
+      "size": 669,
+      "signature": "g3aPFxD+dXjO63yB6SOzu8vMy+20dFmj/w0hDu13TaQwqcDYJpQIYX4DgTLRsIjmvblx3zt+IGAh05cMMjOADQ=="
     },
     {
       "id": "smart_auto_archiver",
       "name": "Auto Archive Chats",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Архивирует неактивные чаты при запуске приложения.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/smart_auto_archiver/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/smart_auto_archiver/plugin.iosplug",
       "sha256": "e718d2fe48784f7b96abd70a62f2b685b55e7d61f3304f373ed3eeb776b3cdf1",
       "size": 255,
       "signature": "0bkhxgYM+o4YSo1104YIZtFVXH7YAg9kClI1ZkFaz3ONfqQ3/hVXvLjsM+NdO3ZjoiAnwHknHmfDSFtINk3HCA=="
@@ -414,7 +414,7 @@
     {
       "id": "text-shortcuts",
       "name": "Text shortcuts",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Expands shortcuts in outgoing messages: :shrug: → ¯\\_(ツ)_/¯, :lenny: → ( ͡° ͜ʖ ͡°), :tableflip: → (╯°□°)╯︵ ┻━┻, ->, <-, (c), (tm) and more.",
       "tags": [
@@ -423,22 +423,38 @@
       ],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/text-shortcuts/plugin.ayu.js",
-      "sha256": "a70e7629f3d480507db2546d73ce20a47001212d6ffca5668f443f790716282d",
-      "size": 1174,
-      "signature": "Gv16MGLytGILJ/TsCm6N14FYnVjffavOylt+HO/LX7o2mffmdY6TuZWStjj4vl3bQ00Zv+ujL8vRxIOdlQfjCA=="
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/text-shortcuts/plugin.ayu.js",
+      "sha256": "2cd4185209959aa9ecd16f60bd3ac1787458e53cd5ba505518d1da1a04784b64",
+      "size": 1169,
+      "signature": "jDeDAJcr2H8prbw3/Hk1XcdtQMNaXqFWKR91wDCiZ4HffuBFX7NUi+gV68B2I2YZE+iClpmM3uTC9ItUtrLDBg=="
+    },
+    {
+      "id": "translate-before-send",
+      "name": "Translate before sending",
+      "author": "murk-sus & neosay-dev",
+      "version": "1.0",
+      "description": "A 🌐 button above the composer translates the draft before you send it. The translation runs through Google's public endpoint; the text leaves the device only when you tap the button.",
+      "tags": [
+        "text",
+        "translation"
+      ],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/translate-before-send/plugin.void.js",
+      "sha256": "91452141f4805f62f5c80d3842a861cca836175e8066f5be3a137e1118924f69",
+      "size": 3609
     },
     {
       "id": "unlim_accounts",
       "name": "Unlim Accounts",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0",
       "description": "Raises the local client add-account limit to 999 through the existing iOS bridge.",
       "tags": [
         "native"
       ],
       "kind": "iosplug",
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/unlim_accounts/plugin.iosplug",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/unlim_accounts/plugin.iosplug",
       "sha256": "eefee1f55d471fb50d885e1aee444e2784442956cf34723975c6378fc080667a",
       "size": 2036,
       "signature": "cchncFCuUASH4i7I+3OcwU0EwiDdR+tq54hZbBS9Wse/1C8sZVfaAbZ6IaV+HTAAORlyvFIR+c7yiRUUfsSWCw=="
@@ -452,26 +468,26 @@
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/visual-overlay/plugin.ayu.js",
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/visual-overlay/plugin.ayu.js",
       "sha256": "4967d90a3b4a6e473e7bdfb9ad08d2d996c5c65d367f1f750711ee0bcae996fc",
       "size": 3535,
       "screenshots": [
-        "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/visual-overlay/screenshot.jpg"
+        "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/visual-overlay/screenshot.jpg"
       ],
       "signature": "lSg4G4PFRKpshWVDT+6tCmYkV3O1qfhVeiJc1Mga/mcQim8eUT9DpiHYkXOSLMPnfxabMrXsovJtDZ3whFMCDg=="
     },
     {
       "id": "year-in-review",
       "name": "Итоги года",
-      "author": "murk-sus & dsn2fvhmn4-lgtm",
+      "author": "murk-sus & neosay-dev",
       "version": "1.0.0",
       "description": "Пункт «Итоги года» в меню сообщения: сколько вы переписывались в этом чате с 1 января, самые активные месяцы и дни.",
       "tags": [],
       "kind": "js",
       "injects": false,
-      "url": "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/plugins/year-in-review/plugin.ayu.js",
-      "sha256": "478a1177e8f889bfc4ce9ceb05980cb9f7dd7979266f3f9dfa17bfd5c66a6394",
-      "size": 768
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/year-in-review/plugin.ayu.js",
+      "sha256": "75d1ffde4941524a6e42dcc71ebc75be8dec7ed181e08522d7187a076a8e5c55",
+      "size": 763
     }
   ]
 }

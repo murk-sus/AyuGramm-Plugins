@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Sign every catalog plugin with the AyuGram Ed25519 key and write signatures.json.
+"""Sign every catalog plugin with the VoidGram Ed25519 key and write signatures.json.
 
 The private key never enters the repository. It is read from $AYU_SIGNING_KEY or
 ~/.config/ayugram-plugins/signing-key.pem. Run after changing a plugin, then build_index.py:
 
     python3 tools/sign.py && python3 tools/build_index.py
 
-A signed plugin counts as official in AyuGram, so it may inject into the app (player, lyrics).
+A signed plugin counts as official in VoidGram, so it may inject into the app (player, lyrics).
 Only sign plugins whose code you have reviewed.
 """
 import base64
@@ -19,7 +19,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-FILES = ("plugin.ayu.js", "plugin.ayu.py", "plugin.ayu.lua", "plugin.wasm", "plugin.iosplug")
+FILES = ("plugin.void.js", "plugin.void.py", "plugin.void.lua", "plugin.ayu.js", "plugin.ayu.py", "plugin.ayu.lua", "plugin.wasm", "plugin.iosplug")
 
 
 def main():

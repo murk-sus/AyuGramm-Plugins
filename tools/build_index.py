@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate every plugin and write index.json, the catalog AyuGram downloads.
+"""Validate every plugin and write index.json, the catalog VoidGram downloads.
 
 Each plugin lives in plugins/<id>/ as either
 - plugin.ayu.js: a JavaScript code plugin with an `// ==AyuPlugin==` header (kind "js"), or
@@ -8,7 +8,7 @@ Each plugin lives in plugins/<id>/ as either
 - plugin.wasm: a Rust/WebAssembly plugin with an `ayu.manifest` custom section (kind "wasm"),
 - plugin.iosplug: a native plugin card, `ayu-iosplug-1` or `ayu-iosplug-2` (kind "iosplug").
 `@inject true` (or `"inject": true`) marks plugins that change the app itself (player, lyrics);
-the app installs those only with an AyuGram signature, which tools/sign.py writes to
+the app installs those only with a VoidGram signature, which tools/sign.py writes to
 signatures.json with the private key kept outside the repository.
 The index carries the SHA-256 of each file; the app refuses a download that does not match.
 """
@@ -19,12 +19,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RAW = "https://raw.githubusercontent.com/murk-sus/AyuGramm-Plugins/main/"
+RAW = "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/"
 ID = re.compile(r"^[a-z0-9_-]{1,64}$")
 REQUIRED = ("id", "name", "author", "version", "description")
 MAX_BYTES = 512 * 1024
-# Every plugin in this catalog is made and maintained by the AyuGramm team.
-CATALOG_AUTHOR = "murk-sus & dsn2fvhmn4-lgtm"
+# Every plugin in this catalog is made and maintained by the VoidGram team.
+CATALOG_AUTHOR = "murk-sus & neosay-dev"
 MAX_IOSPLUG_BYTES = 64 * 1024
 MAX_WASM_BYTES = 2 * 1024 * 1024
 # A plugin folder may also hold a screenshot (and a README.md written by tools/build_readme.py).
@@ -37,7 +37,7 @@ def signatures():
 
 
 def wasm_manifest(data):
-    """The JSON of the `ayu.manifest` custom section, or None."""
+    """The JSON of the `ayu.manifest` or `void.manifest` custom section, or None."""
     def leb(i):
         result = shift = 0
         while True:
@@ -55,7 +55,7 @@ def wasm_manifest(data):
         end = i + size
         if sid == 0:
             n, j = leb(i)
-            if data[j:j + n] == b"ayu.manifest":
+            if data[j:j + n] in (b"ayu.manifest", b"void.manifest"):
                 return json.loads(data[j + n:end].decode("utf-8"))
         i = end
     return None
@@ -64,9 +64,14 @@ def wasm_manifest(data):
 def header(source, comment="//"):
     fields = {}
     for line in source.splitlines()[:80]:
-        match = re.match(r"\s*" + re.escape(comment) + r"\s*@(\w+)\s*(.*)$", line)
+        match = re.match(r"\s*" + re.escape(comment) + r"\s*@([\w:-]+)\s*(.*)$", line)
         if match:
-            fields[match.group(1).lower()] = match.group(2).strip()
+            key = match.group(1).lower()
+            # `@name:ru` and `@description:ru` are localized variants; the catalog keeps the
+            # base field, the app reads the variant from the plugin itself.
+            if ":" in key:
+                continue
+            fields[key] = match.group(2).strip()
     return fields
 
 
@@ -134,21 +139,23 @@ def main():
             except (IndexError, UnicodeDecodeError, json.JSONDecodeError):
                 manifest = None
             if not isinstance(manifest, dict):
-                errors.append(f"{folder.name}: plugin.wasm lacks an ayu.manifest section")
+                errors.append(f"{folder.name}: plugin.wasm lacks an ayu.manifest or void.manifest section")
                 continue
             fields = {key: str(value) for key, value in manifest.items() if isinstance(value, (str, bool))}
             fields["tags"] = ", ".join(manifest.get("tags", [])) if isinstance(manifest.get("tags"), list) else fields.get("tags", "")
             fields["inject"] = "true" if manifest.get("inject") is True else "false"
             kind, filename = "wasm", "plugin.wasm"
         else:
-            if (folder / "plugin.ayu.py").is_file():
-                path, kind, filename, comment = folder / "plugin.ayu.py", "python", "plugin.ayu.py", "#"
-            elif (folder / "plugin.ayu.lua").is_file():
-                path, kind, filename, comment = folder / "plugin.ayu.lua", "lua", "plugin.ayu.lua", "--"
+            for name, kind, comment in (("plugin.void.py", "python", "#"), ("plugin.void.lua", "lua", "--"), ("plugin.void.js", "js", "//"),
+                                        ("plugin.ayu.py", "python", "#"), ("plugin.ayu.lua", "lua", "--"), ("plugin.ayu.js", "js", "//")):
+                candidate = folder / name
+                if candidate.is_file():
+                    path, filename = candidate, name
+                    break
             else:
-                path, kind, filename, comment = folder / "plugin.ayu.js", "js", "plugin.ayu.js", "//"
+                path, kind, filename, comment = folder / "plugin.void.js", "js", "plugin.void.js", "//"
             if not path.is_file():
-                errors.append(f"{folder.name}: missing plugin.ayu.js, plugin.ayu.py, plugin.ayu.lua, plugin.wasm or plugin.iosplug")
+                errors.append(f"{folder.name}: missing plugin.void.js, plugin.void.py, plugin.void.lua, plugin.wasm or plugin.iosplug")
                 continue
             data = path.read_bytes()
             if len(data) > MAX_BYTES:
