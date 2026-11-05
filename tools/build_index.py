@@ -37,7 +37,7 @@ def signatures():
 
 
 def wasm_manifest(data):
-    """The JSON of the `ayu.manifest` custom section, or None."""
+    """The JSON of the `ayu.manifest` or `void.manifest` custom section, or None."""
     def leb(i):
         result = shift = 0
         while True:
@@ -55,7 +55,7 @@ def wasm_manifest(data):
         end = i + size
         if sid == 0:
             n, j = leb(i)
-            if data[j:j + n] == b"ayu.manifest":
+            if data[j:j + n] in (b"ayu.manifest", b"void.manifest"):
                 return json.loads(data[j + n:end].decode("utf-8"))
         i = end
     return None
@@ -134,21 +134,23 @@ def main():
             except (IndexError, UnicodeDecodeError, json.JSONDecodeError):
                 manifest = None
             if not isinstance(manifest, dict):
-                errors.append(f"{folder.name}: plugin.wasm lacks an ayu.manifest section")
+                errors.append(f"{folder.name}: plugin.wasm lacks an ayu.manifest or void.manifest section")
                 continue
             fields = {key: str(value) for key, value in manifest.items() if isinstance(value, (str, bool))}
             fields["tags"] = ", ".join(manifest.get("tags", [])) if isinstance(manifest.get("tags"), list) else fields.get("tags", "")
             fields["inject"] = "true" if manifest.get("inject") is True else "false"
             kind, filename = "wasm", "plugin.wasm"
         else:
-            if (folder / "plugin.ayu.py").is_file():
-                path, kind, filename, comment = folder / "plugin.ayu.py", "python", "plugin.ayu.py", "#"
-            elif (folder / "plugin.ayu.lua").is_file():
-                path, kind, filename, comment = folder / "plugin.ayu.lua", "lua", "plugin.ayu.lua", "--"
+            for name, kind, comment in (("plugin.void.py", "python", "#"), ("plugin.void.lua", "lua", "--"), ("plugin.void.js", "js", "//"),
+                                        ("plugin.ayu.py", "python", "#"), ("plugin.ayu.lua", "lua", "--"), ("plugin.ayu.js", "js", "//")):
+                candidate = folder / name
+                if candidate.is_file():
+                    path, filename = candidate, name
+                    break
             else:
-                path, kind, filename, comment = folder / "plugin.ayu.js", "js", "plugin.ayu.js", "//"
+                path, kind, filename, comment = folder / "plugin.void.js", "js", "plugin.void.js", "//"
             if not path.is_file():
-                errors.append(f"{folder.name}: missing plugin.ayu.js, plugin.ayu.py, plugin.ayu.lua, plugin.wasm or plugin.iosplug")
+                errors.append(f"{folder.name}: missing plugin.void.js, plugin.void.py, plugin.void.lua, plugin.wasm or plugin.iosplug")
                 continue
             data = path.read_bytes()
             if len(data) > MAX_BYTES:

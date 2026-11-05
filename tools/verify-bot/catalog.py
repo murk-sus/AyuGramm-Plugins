@@ -24,12 +24,13 @@ ID = re.compile(r"^[a-z0-9_-]{1,64}$")
 NICK = re.compile(r"^@[A-Za-z0-9_]{4,32}$")
 FONT_MAX_BYTES = 15 * 1024 * 1024
 PLUGIN_FILES = ("plugin.ayu.js", "plugin.ayu.py", "plugin.ayu.lua", "plugin.wasm", "plugin.iosplug")
-# Every spelling VoidGram accepts: ".ayu.js", ".ayujs" and plain ".js" are all JavaScript, and so on.
+# Every spelling VoidGram accepts: ".void.js"/".ayu.js", ".voidjs"/".ayujs" and plain ".js"
+# are all JavaScript, and so on.
 EXTENSIONS = {
-    "js": ("ayu.js", "ayujs", "js"),
-    "python": ("ayu.py", "ayupy", "py"),
-    "lua": ("ayu.lua", "ayulua", "lua"),
-    "wasm": ("ayu.wasm", "ayuwasm", "wasm"),
+    "js": ("void.js", "voidjs", "ayu.js", "ayujs", "js"),
+    "python": ("void.py", "voidpy", "ayu.py", "ayupy", "py"),
+    "lua": ("void.lua", "voidlua", "ayu.lua", "ayulua", "lua"),
+    "wasm": ("void.wasm", "voidwasm", "ayu.wasm", "ayuwasm", "wasm"),
     "iosplug": ("iosplug",),
 }
 TARGETS = {"js": "plugin.ayu.js", "python": "plugin.ayu.py", "lua": "plugin.ayu.lua", "wasm": "plugin.wasm", "iosplug": "plugin.iosplug"}
@@ -164,8 +165,9 @@ def inspect(filename, data):
                     extra={"style": names.get(2, ""), "postscript": names.get(6, "")})
     kind = plugin_kind(filename)
     if kind is None:
-        raise Refused("Поддерживаются шрифты .ttf/.otf и плагины .ayujs/.ayu.js/.js, .ayupy/.ayu.py/.py, "
-                      ".ayulua/.ayu.lua/.lua, .wasm и .iosplug.")
+        raise Refused("Поддерживаются шрифты .ttf/.otf и плагины .voidjs/.void.js/.ayujs/.ayu.js/.js, "
+                      ".voidpy/.void.py/.ayupy/.ayu.py/.py, .voidlua/.void.lua/.ayulua/.ayu.lua/.lua, "
+                      ".voidwasm/.void.wasm/.wasm и .iosplug.")
     target = TARGETS[kind]
     with tempfile.TemporaryDirectory() as tmp:
         # build_index wants the file in a folder named after the plugin id; read the id first.

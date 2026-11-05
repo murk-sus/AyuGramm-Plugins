@@ -656,7 +656,7 @@ def handle_message(state, message):
         receive_file(chat, sender, user, message["document"])
         return
     if step == "upload_file":
-        send(chat, "Пришлите документом файл шрифта .ttf/.otf или плагина (.ayujs/.ayu.js, .ayupy/.ayu.py, .ayulua/.ayu.lua, .wasm, .iosplug). /cancel — отмена.")
+        send(chat, "Пришлите документом файл шрифта .ttf/.otf или плагина (.voidjs/.void.js/.ayujs/.ayu.js, .voidpy/.void.py/.ayupy/.ayu.py, .voidlua/.void.lua/.ayulua/.ayu.lua, .wasm, .iosplug). /cancel — отмена.")
         return
     if step == "upload_author":
         author = text if text.startswith("@") else "@" + text
@@ -789,7 +789,7 @@ def handle_callback(state, query):
     elif data == "upload":
         drop_upload(sender, user)
         user["step"] = "upload_file"
-        send(chat, "Пришлите файл документом: шрифт .ttf/.otf или плагин .ayujs/.ayu.js, .ayupy/.ayu.py, .ayulua/.ayu.lua, "
+        send(chat, "Пришлите файл документом: шрифт .ttf/.otf или плагин .voidjs/.void.js/.ayujs/.ayu.js, .voidpy/.void.py/.ayupy/.ayu.py, .voidlua/.void.lua/.ayulua/.ayu.lua, "
                    ".wasm, .iosplug. Потом бот спросит автора, описание и скриншот. /cancel — отмена.")
     elif data == "catalog":
         show_catalog(chat)
