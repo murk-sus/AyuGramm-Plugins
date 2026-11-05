@@ -58,7 +58,7 @@ function load(file) {
         storage: { get: () => null, set: () => {} }
     };
     const noop = () => 0;
-    const sandbox = { ayu: lenient(ayu), console: { log: ayu.log, warn: noop, error: noop, info: noop },
+    const sandbox = { ayu: lenient(ayu), voidgram: lenient(ayu), $void: lenient(ayu), console: { log: ayu.log, warn: noop, error: noop, info: noop },
                       setTimeout: noop, setInterval: noop, clearTimeout: noop, clearInterval: noop };
     vm.createContext(sandbox);
     vm.runInContext(fs.readFileSync(file, 'utf8'), sandbox, { filename: file, timeout: 2000 });
@@ -80,8 +80,9 @@ const root = path.join(__dirname, '..', 'plugins');
 const results = {};
 const community = new Set();
 for (const id of fs.readdirSync(root)) {
-    const file = path.join(root, id, 'plugin.ayu.js');
-    if (!fs.existsSync(file)) continue;
+    const candidates = [path.join(root, id, 'plugin.void.js'), path.join(root, id, 'plugin.ayu.js')];
+    const file = candidates.find((candidate) => fs.existsSync(candidate));
+    if (!file) continue;
     results[id] = load(file);
     // Plugins by other authors (meta.json from the team bot) only have to load; the checks
     // below describe the team's own plugins.

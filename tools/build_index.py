@@ -64,9 +64,14 @@ def wasm_manifest(data):
 def header(source, comment="//"):
     fields = {}
     for line in source.splitlines()[:80]:
-        match = re.match(r"\s*" + re.escape(comment) + r"\s*@(\w+)\s*(.*)$", line)
+        match = re.match(r"\s*" + re.escape(comment) + r"\s*@([\w:-]+)\s*(.*)$", line)
         if match:
-            fields[match.group(1).lower()] = match.group(2).strip()
+            key = match.group(1).lower()
+            # `@name:ru` and `@description:ru` are localized variants; the catalog keeps the
+            # base field, the app reads the variant from the plugin itself.
+            if ":" in key:
+                continue
+            fields[key] = match.group(2).strip()
     return fields
 
 

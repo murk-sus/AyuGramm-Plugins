@@ -429,6 +429,22 @@
       "signature": "jDeDAJcr2H8prbw3/Hk1XcdtQMNaXqFWKR91wDCiZ4HffuBFX7NUi+gV68B2I2YZE+iClpmM3uTC9ItUtrLDBg=="
     },
     {
+      "id": "translate-before-send",
+      "name": "Translate before sending",
+      "author": "murk-sus & neosay-dev",
+      "version": "1.0",
+      "description": "A 🌐 button above the composer translates the draft before you send it. The translation runs through Google's public endpoint; the text leaves the device only when you tap the button.",
+      "tags": [
+        "text",
+        "translation"
+      ],
+      "kind": "js",
+      "injects": false,
+      "url": "https://raw.githubusercontent.com/murk-sus/VoidGram-plugins/main/plugins/translate-before-send/plugin.void.js",
+      "sha256": "91452141f4805f62f5c80d3842a861cca836175e8066f5be3a137e1118924f69",
+      "size": 3609
+    },
+    {
       "id": "unlim_accounts",
       "name": "Unlim Accounts",
       "author": "murk-sus & neosay-dev",
